@@ -1,0 +1,222 @@
+{
+  "ruleset_id": "BIMGUARD-MC-001",
+  "ruleset_version": "1.0.0",
+  "mechanism": "Microbially Influenced Corrosion (MIC)",
+  "description": "BIMGUARD AI compliance ruleset for Microbially Influenced Corrosion (MIC) in MEP building services pipework. Covers dead-leg stagnation, Legionella risk temperature zones, under-insulation corrosion, and biofilm susceptibility by material and system type.",
+  "standards_referenced": [
+    "CIBSE TM13:2013 — Minimising the Risk of Legionella",
+    "HSE HSG274 Part 1 — Evaporative Cooling Systems",
+    "HSE HSG274 Part 2 — Hot and Cold Water Systems",
+    "HSE HSG274 Part 3 — Other Risk Systems",
+    "BS 8552:2012 — Sampling and Monitoring of Water Systems",
+    "ASTM G-187 — Standard Practice for Measurement of Soil Resistivity",
+    "EN ISO 9308-1 — Water Quality Microbiological Methods",
+    "WHO Guidelines for Drinking Water Quality 4th Ed. (2011)",
+    "NACCE TPC 11 — MIC in Industrial Water Systems",
+    "NACE SP0198 — Control of Corrosion Under Thermal Insulation",
+    "CIBSE Guide G — Public Health Engineering"
+  ],
+  "scoring_model": {
+    "formula": "Score_MC = (0.35 × flow_velocity_risk) + (0.30 × temperature_risk) + (0.25 × dead_leg_risk) + (0.10 × material_susceptibility)",
+    "system_modifier": "Base score × system_type_multiplier (capped at 1.00)",
+    "under_insulation_pathway": "If under-insulation risk × 0.85 > modified score, UIC pathway score used instead (worst-case of two independent pathways)",
+    "weights": {
+      "flow_velocity_risk": 0.35,
+      "temperature_risk": 0.30,
+      "dead_leg_risk": 0.25,
+      "material_susceptibility": 0.10
+    },
+    "rationale": "Flow velocity receives highest weight (0.35) because stagnation is the necessary precondition for all MIC mechanisms — without stagnation, biofilms cannot establish at scale. Temperature receives 0.30 because it determines which microbial communities are active and whether Legionella proliferation is possible. Dead-leg geometry receives 0.25 as the structural enabler of stagnation. Material susceptibility receives 0.10 because it modifies the consequence of biofilm establishment but does not prevent it."
+  },
+  "risk_bands": {
+    "Low":     {"range": "< 0.25",      "bcf_action": "Record in asset register — no BCF issue"},
+    "Medium":  {"range": "0.25 – 0.50", "bcf_action": "BCF Normal priority — schedule monitoring programme"},
+    "High":    {"range": "0.50 – 0.75", "bcf_action": "BCF Major priority — remediation required within 3 months"},
+    "Critical":{"range": "> 0.75",      "bcf_action": "BCF Critical priority — immediate remediation or shutdown required"}
+  },
+  "microbial_groups": {
+    "SRB": {
+      "name": "Sulphate-Reducing Bacteria",
+      "temperature_range_c": "15–65 (mesophilic 25–35, thermophilic 45–65)",
+      "flow_preference": "Anaerobic — stagnant or very low flow",
+      "corrosion_mechanism": "Hydrogen sulphide production under biofilm — aggressive pitting of carbon steel and cast iron. Forms iron sulphide (FeS) corrosion product.",
+      "pipe_materials_at_risk": ["carbon_steel", "cast_iron", "galv_steel", "ss304"],
+      "reference": "ASTM G-187 / NACCE TPC 11"
+    },
+    "IOB": {
+      "name": "Iron-Oxidising Bacteria",
+      "temperature_range_c": "10–35",
+      "flow_preference": "Aerobic zones — low flow allows oxygen stratification",
+      "corrosion_mechanism": "Creates differential aeration cells — accelerated pitting at aerobic/anaerobic interfaces. Tubercle formation restricts flow.",
+      "pipe_materials_at_risk": ["carbon_steel", "cast_iron"],
+      "reference": "NACCE TPC 11"
+    },
+    "APB": {
+      "name": "Acid-Producing Bacteria",
+      "temperature_range_c": "15–45",
+      "flow_preference": "Biofilm — can be aerobic or anaerobic",
+      "corrosion_mechanism": "Organic acid production lowers local pH — destroys passive films on stainless steel grades. Enables pitting initiation below normal CCT.",
+      "pipe_materials_at_risk": ["ss304", "ss316", "carbon_steel", "aluminium"],
+      "reference": "CIBSE Guide G / NACCE TPC 11"
+    },
+    "Legionella": {
+      "name": "Legionella pneumophila",
+      "temperature_range_c": "20–45 (optimal 35–46, survival to 55, killed at 60+)",
+      "flow_preference": "Stagnant warm water — dead-legs and low-use outlets",
+      "corrosion_mechanism": "Not a direct corrosion agent — health hazard through inhalation of contaminated aerosol. Biofilm forms on pipe scale and corrosion products.",
+      "pipe_materials_at_risk": ["all_system_types"],
+      "reference": "CIBSE TM13:2013 / HSE HSG274"
+    }
+  },
+  "flow_velocity_classes": {
+    "FV0_STAGNANT":   {"label": "Stagnant / dead-leg",       "threshold_ms": 0.0,  "risk": 1.00, "reference": "CIBSE TM13:2013"},
+    "FV1_VERY_LOW":   {"label": "Very low < 0.1 m/s",        "threshold_ms": 0.1,  "risk": 0.80, "reference": "HSE HSG274 Part 2"},
+    "FV2_LOW":        {"label": "Low 0.1–0.3 m/s",           "threshold_ms": 0.3,  "risk": 0.55, "reference": "HSE HSG274 Part 2"},
+    "FV3_ACCEPTABLE": {"label": "Acceptable 0.3–0.6 m/s",    "threshold_ms": 0.6,  "risk": 0.25, "reference": "CIBSE Guide G"},
+    "FV4_GOOD":       {"label": "Good 0.6–1.5 m/s",          "threshold_ms": 1.5,  "risk": 0.10, "reference": "CIBSE Guide G"},
+    "FV5_TURBULENT":  {"label": "Turbulent > 1.5 m/s",       "threshold_ms": 999,  "risk": 0.02, "reference": "CIBSE Guide G"}
+  },
+  "temperature_classes": {
+    "T0_COLD":      {"range": "< 20°C",   "risk": 0.15, "reference": "WHO GDWQ 4th Ed. — cold water <20°C"},
+    "T1_MARGINAL":  {"range": "20–25°C",  "risk": 0.35, "reference": "CIBSE TM13 — marginal zone"},
+    "T2_DANGER":    {"range": "25–45°C",  "risk": 1.00, "reference": "CIBSE TM13:2013 — Legionella danger zone"},
+    "T3_TOLERABLE": {"range": "45–55°C",  "risk": 0.45, "reference": "HSE HSG274 — Legionella above optimum"},
+    "T4_SAFE_HOT":  {"range": "> 55°C",   "risk": 0.05, "reference": "CIBSE TM13 — Legionella destroyed >60°C"},
+    "T5_UNKNOWN":   {"range": "Unknown",   "risk": 0.65, "reference": "Conservative default"}
+  },
+  "dead_leg_classes": {
+    "DL0_THROUGH":  {"label": "Through-flow",       "length_to_dia_ratio": "0",      "risk": 0.05, "reference": "HSE HSG274 Part 2"},
+    "DL1_SHORT":    {"label": "Short (< 3D)",        "length_to_dia_ratio": "< 3",    "risk": 0.30, "reference": "HSE HSG274 — below threshold"},
+    "DL2_MODERATE": {"label": "Moderate (3D–10D)",   "length_to_dia_ratio": "3–10",   "risk": 0.65, "reference": "HSE HSG274 — exceeds threshold"},
+    "DL3_LONG":     {"label": "Long (10D–20D)",      "length_to_dia_ratio": "10–20",  "risk": 0.85, "reference": "HSE HSG274 — high risk"},
+    "DL4_CRITICAL": {"label": "Critical (> 20D)",    "length_to_dia_ratio": "> 20",   "risk": 1.00, "reference": "HSE HSG274 — eliminate"},
+    "DL5_UNKNOWN":  {"label": "Unknown topology",    "length_to_dia_ratio": "n/a",    "risk": 0.50, "reference": "Conservative default"}
+  },
+  "material_susceptibility": {
+    "carbon_steel":  {"score": 1.00, "label": "Carbon / mild steel",    "reference": "ASTM G-187 / NACCE TPC 11"},
+    "cast_iron":     {"score": 0.90, "label": "Cast iron",              "reference": "NACCE TPC 11"},
+    "galv_steel":    {"score": 0.75, "label": "Galvanised steel",       "reference": "NACCE TPC 11"},
+    "ss304":         {"score": 0.30, "label": "Stainless steel 304",    "reference": "ASTM G-187"},
+    "ss316":         {"score": 0.20, "label": "Stainless steel 316",    "reference": "ASTM G-187"},
+    "duplex2205":    {"score": 0.10, "label": "Duplex 2205",            "reference": "NACE / ASTM G-187"},
+    "copper":        {"score": 0.15, "label": "Copper",                 "reference": "CIBSE Guide G — antimicrobial properties"},
+    "brass":         {"score": 0.25, "label": "Brass (70/30)",          "reference": "CIBSE Guide G"},
+    "cpvc":          {"score": 0.05, "label": "CPVC",                   "reference": "Non-metallic — biofilm substrate only"},
+    "titanium":      {"score": 0.05, "label": "Titanium",               "reference": "ASTM G-187 — exceptional MIC resistance"}
+  },
+  "system_type_modifiers": {
+    "DOMESTICCOLDWATER": {"multiplier": 1.30, "rationale": "Primary Legionella risk system — CIBSE TM13 mandatory risk assessment"},
+    "DOMESTICHOTWATER":  {"multiplier": 1.25, "rationale": "Legionella proliferation if distribution temperature < 55°C — HSE HSG274 Part 2"},
+    "CONDENSERWATER":    {"multiplier": 1.20, "rationale": "Warm recirculating system — high MIC risk — HSE HSG274 Part 1"},
+    "CHILLEDWATER":      {"multiplier": 1.15, "rationale": "7–12°C chilled water — biofilm active, low flow zones at risk"},
+    "FIREPROTECTION":    {"multiplier": 1.40, "rationale": "Infrequent / zero flow — highest dead-leg stagnation risk — HSE HSG274 Part 3"},
+    "IRRIGATION":        {"multiplier": 1.10, "rationale": "Intermittent flow — warm conditions in summer"},
+    "WASTEWATER":        {"multiplier": 0.80, "rationale": "Anaerobic SRB active but Legionella consequence lower"},
+    "PROCESSWATER":      {"multiplier": 1.00, "rationale": "Risk depends on operating conditions — no modifier"},
+    "UNKNOWN":           {"multiplier": 1.05, "rationale": "Conservative uplift for unknown system type"}
+  },
+  "under_insulation_risk": {
+    "none":            0.00,
+    "good_condition":  0.10,
+    "weathered":       0.45,
+    "damaged":         0.80,
+    "wet":             1.00,
+    "unknown":         0.35
+  },
+  "mitigation_catalogue": {
+    "MIT-MIC-001": "Eliminate dead-leg — reconfigure pipework to active through-flow configuration (HSE HSG274 preferred solution)",
+    "MIT-MIC-002": "Install automatic flushing device — programme to flush weekly at minimum (CIBSE TM13 requirement)",
+    "MIT-MIC-003": "Increase design flow velocity to minimum 0.3 m/s — revise pipe sizing or reroute to reduce network length",
+    "MIT-MIC-004": "Raise hot water storage and distribution temperature to minimum 60°C storage / 55°C at outlets (HSE HSG274 Part 2)",
+    "MIT-MIC-005": "Reduce cold water temperature to below 20°C — review insulation against heat gain from adjacent services",
+    "MIT-MIC-006": "Specify copper or CPVC pipework in replacement — antimicrobial material substitution",
+    "MIT-MIC-007": "Repair or replace damaged/wet insulation — prevent under-insulation moisture accumulation",
+    "MIT-MIC-008": "Implement biocide dosing programme — chlorination or alternative biocide per BS 8552",
+    "MIT-MIC-009": "Introduce microbiological monitoring programme — EN ISO 9308-1 sampling at identified risk points",
+    "MIT-MIC-010": "Conduct thermal disinfection — pasteurisation at minimum 70°C for 1 hour (CIBSE TM13 emergency response)"
+  },
+  "pset_mic_risk_schema": {
+    "pset_name": "Pset_MICRisk",
+    "properties": [
+      {"name": "MICRiskScore",          "type": "IfcReal",   "description": "MC-001 composite risk score (0.0–1.0)"},
+      {"name": "MICRiskBand",           "type": "IfcLabel",  "description": "Risk band: Low / Medium / High / Critical"},
+      {"name": "FlowVelocityClass",     "type": "IfcLabel",  "description": "Flow velocity classification per CIBSE TM13"},
+      {"name": "TemperatureClass",      "type": "IfcLabel",  "description": "Temperature risk class per CIBSE TM13 / HSE HSG274"},
+      {"name": "DeadLegClass",          "type": "IfcLabel",  "description": "Dead-leg geometry classification per HSE HSG274"},
+      {"name": "MaterialSusceptibility","type": "IfcReal",   "description": "Material MIC susceptibility sub-score (0.0–1.0)"},
+      {"name": "UnderInsulationRisk",   "type": "IfcReal",   "description": "Under-insulation corrosion pathway risk (0.0–1.0)"},
+      {"name": "SystemTypeModifier",    "type": "IfcReal",   "description": "System type risk multiplier"},
+      {"name": "RecommendedMitigation", "type": "IfcText",   "description": "Pipe-separated list of mitigation codes from MC-001 catalogue"},
+      {"name": "RulesetVersion",        "type": "IfcLabel",  "description": "MC-001 ruleset version string"},
+      {"name": "AssessmentDate",        "type": "IfcDateTime","description": "ISO 8601 timestamp of assessment run"}
+    ]
+  },
+  "high_risk_configurations": [
+    {
+      "config_id": "MIC-HRC-001",
+      "description": "Domestic hot water dead-leg at Legionella danger zone temperature",
+      "system_type": "DOMESTICHOTWATER",
+      "material": "carbon_steel",
+      "typical_flow_velocity_ms": 0.0,
+      "typical_temperature_c": 35.0,
+      "typical_dead_leg_ratio": ">10D",
+      "expected_score_range": "0.85–1.00",
+      "expected_band": "Critical",
+      "reference": "HSE HSG274 Part 2 — hot water dead-legs"
+    },
+    {
+      "config_id": "MIC-HRC-002",
+      "description": "Fire suppression system — effectively permanent dead-leg",
+      "system_type": "FIREPROTECTION",
+      "material": "carbon_steel",
+      "typical_flow_velocity_ms": 0.0,
+      "typical_temperature_c": 22.0,
+      "typical_dead_leg_ratio": ">100D",
+      "expected_score_range": "0.90–1.00",
+      "expected_band": "Critical",
+      "reference": "HSE HSG274 Part 3 — infrequent use systems"
+    },
+    {
+      "config_id": "MIC-HRC-003",
+      "description": "Chilled water system with under-insulation wet condition",
+      "system_type": "CHILLEDWATER",
+      "material": "carbon_steel",
+      "typical_flow_velocity_ms": 0.1,
+      "typical_temperature_c": 10.0,
+      "insulation_condition": "wet",
+      "expected_score_range": "0.65–0.80",
+      "expected_band": "High",
+      "reference": "NACE SP0198 — under-insulation corrosion"
+    },
+    {
+      "config_id": "MIC-HRC-004",
+      "description": "Domestic cold water storage — temperature above 20°C due to heat gain",
+      "system_type": "DOMESTICCOLDWATER",
+      "material": "carbon_steel",
+      "typical_flow_velocity_ms": 0.05,
+      "typical_temperature_c": 24.0,
+      "expected_score_range": "0.75–0.90",
+      "expected_band": "Critical",
+      "reference": "CIBSE TM13 — cold water storage risk"
+    },
+    {
+      "config_id": "MIC-HRC-005",
+      "description": "Condenser water warm loop with low recirculation",
+      "system_type": "CONDENSERWATER",
+      "material": "galv_steel",
+      "typical_flow_velocity_ms": 0.2,
+      "typical_temperature_c": 30.0,
+      "expected_score_range": "0.55–0.75",
+      "expected_band": "High",
+      "reference": "HSE HSG274 Part 1 — evaporative cooling systems"
+    }
+  ],
+  "ifc_data_sources": {
+    "flow_velocity": ["Pset_PipeSegmentOccurrence.FlowVelocity", "Pset_Duct.AirFlowRate (converted)"],
+    "operating_temperature": ["Pset_PipeSegmentOccurrence.OperatingTemperature", "Pset_ZoneCommon.SetPointTemperature"],
+    "dead_leg_length": ["Calculated from IfcDistributionSystem topology — distance from last active junction to terminal"],
+    "material": ["Pset_MaterialCommon.Name", "IfcMaterial.Name"],
+    "insulation_condition": ["Pset_CoveringCommon.ThermalTransmittance (proxy for condition)", "Custom Pset_MaintenanceRecord.InsulationCondition"],
+    "system_type": ["IfcDistributionSystem.PredefinedType", "IfcDistributionSystem.LongName"]
+  }
+}

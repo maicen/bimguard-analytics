@@ -1,0 +1,171 @@
+{
+  "ruleset_id": "BIMGUARD-CC-001",
+  "ruleset_version": "1.0.0",
+  "mechanism": "Crevice Corrosion",
+  "description": "BIMGUARD AI compliance ruleset for crevice corrosion risk assessment in MEP building services. Checks Critical Crevice Corrosion Temperature (CCT) adequacy of stainless steel grades against operating temperature, joint geometry class, and environment severity. The defining finding of CC-001: SS316 in a pool plant room scores 0.00 galvanic (GC-001) but 0.89 Critical on CC-001 — demonstrating that galvanic checking alone is insufficient.",
+  "standards_referenced": [
+    "EN ISO 15329:2007 — Crevice corrosion testing, wetting classification T0-T5",
+    "ASTM G48 Method B — CCT determination for stainless steel grades",
+    "CIRIA C692 — Stainless steel in construction, CCT data table",
+    "CIBSE Guide G — Public health engineering, crevice corrosion guidance",
+    "IMOA Design Manual 4th Ed. — PREN formula and stainless grade selection",
+    "EN 1993-1-4 — Structural stainless steel",
+    "BS 8539 — Fixings in construction, bi-metallic assembly",
+    "buildingSMART BCF 2.1 — Issue tracking specification",
+    "ISO 19650 — BIM information management, IFC property set framework"
+  ],
+  "mechanism_description": {
+    "summary": "Crevice corrosion initiates in geometrically confined spaces where restricted electrolyte circulation creates an aggressive local chemistry that destroys the passive film on stainless steel — the same passive film that makes these grades resistant to galvanic attack.",
+    "four_stage_process": {
+      "stage_1_initiation": "Confined electrolyte initially identical to bulk solution. Oxygen depletion begins as cathodic reduction consumes O2 faster than diffusion can replenish it.",
+      "stage_2_differential_aeration": "O2-depleted crevice becomes anodic. Metal dissolution begins: M -> M2+ + 2e-. Electrons travel to oxygenated exterior (cathodic).",
+      "stage_3_autocatalytic": "Metal cation hydrolysis lowers local pH. Chloride ions migrate in to maintain charge neutrality. Passive film destroyed by low pH and high Cl- concentration.",
+      "stage_4_propagation": "Autocatalytic chemistry is self-sustaining. Corrosion continues even if external conditions improve — until crevice is eliminated or pipe perforated.",
+      "reference": "Fontana & Greene (1967) — Corrosion Engineering, McGraw-Hill"
+    }
+  },
+  "scoring_model": {
+    "formula": "Score_CC = (0.35 x geometry_risk) + (0.40 x CCT_adequacy) + (0.25 x environment_severity)",
+    "weights": {
+      "geometry_risk": 0.35,
+      "CCT_adequacy": 0.40,
+      "environment_severity": 0.25
+    },
+    "rationale": "CCT adequacy receives highest weight (0.40) as it is the most material-specific determinant — whether the specified grade can resist crevice attack at the operating temperature is the central question. Geometry (0.35) determines whether crevice conditions can establish. Environment severity (0.25) reflects chloride concentration and wetting frequency.",
+    "cct_adequacy_calculation": "Linear interpolation: score 0.00 when operating temp is 20+ degrees below CCT (fully adequate). Score 0.60 when at CCT. Score 1.00 when 30+ degrees above CCT. Extrapolated linearly between these points."
+  },
+  "risk_bands": {
+    "Low":      { "range": "< 0.30",      "bcf_action": "Asset register only — no BCF issue" },
+    "Medium":   { "range": "0.30 - 0.55", "bcf_action": "BCF Normal priority — monitor and review joint specification" },
+    "High":     { "range": "0.55 - 0.80", "bcf_action": "BCF Major priority — material or joint type upgrade required" },
+    "Critical": { "range": "> 0.80",      "bcf_action": "BCF Critical priority — immediate material substitution or redesign" }
+  },
+  "cct_table": {
+    "description": "Critical Crevice Corrosion Temperature for common MEP stainless grades. Below CCT = passive film stable. Above CCT = crevice attack initiates.",
+    "source": "ASTM G48 Method B / CIRIA C692 / Sandvik Corrosion Handbook",
+    "test_conditions": "6% FeCl3 solution per ASTM G48 Method B",
+    "grades": {
+      "ss304_passive":   { "cct_c": -5,   "pren_typical": 19, "label": "SS 304 / 1.4301", "uns": "S30400" },
+      "ss304_active":    { "cct_c": -5,   "pren_typical": 19, "label": "SS 304 (active)",  "uns": "S30400" },
+      "ss316_passive":   { "cct_c": 10,   "pren_typical": 25, "label": "SS 316 / 1.4401", "uns": "S31600" },
+      "ss316_active":    { "cct_c": 10,   "pren_typical": 25, "label": "SS 316 (active)",  "uns": "S31600" },
+      "duplex2205":      { "cct_c": 25,   "pren_typical": 35, "label": "Duplex 2205 / 1.4462", "uns": "S32205" },
+      "superduplex2507": { "cct_c": 50,   "pren_typical": 42, "label": "Super Duplex 2507 / 1.4410", "uns": "S32750" },
+      "titanium":        { "cct_c": 120,  "pren_typical": 45, "label": "Titanium Grade 2", "uns": "R50400" },
+      "hastelloy_c":     { "cct_c": 85,   "pren_typical": 70, "label": "Hastelloy C-276",  "uns": "N10276" }
+    }
+  },
+  "geometry_classes": {
+    "description": "Four geometry classes describing the degree of crevice restriction. Source: CIBSE Guide G / CIRIA C692.",
+    "Open":     { "risk": 0.10, "crevice_width_mm": "> 2.0",     "description": "Butt welds, open pipe ends — free electrolyte circulation" },
+    "Moderate": { "risk": 0.45, "crevice_width_mm": "0.5 - 2.0", "description": "Socket welds, slip-on flanges, press fittings — some flow restriction" },
+    "Tight":    { "risk": 0.75, "crevice_width_mm": "0.1 - 0.5", "description": "Weld neck flanges, compression fittings, lap joints — significant restriction" },
+    "Critical": { "risk": 1.00, "crevice_width_mm": "< 0.1",     "description": "Threaded connections, under clamps, gasket contact — maximum crevice conditions" }
+  },
+  "joint_type_library": {
+    "description": "14-type joint library mapping IFC element types and joint descriptions to geometry class. JT-014 (unknown) defaults to Tight — conservative fallback when joint data is absent from IFC model.",
+    "types": {
+      "JT-001": { "label": "Butt weld",                   "geometry": "Open",     "risk": 0.10, "ifc_keywords": ["butt", "buttweld", "butt weld"] },
+      "JT-002": { "label": "Socket weld",                 "geometry": "Moderate", "risk": 0.45, "ifc_keywords": ["socket", "socketweld", "socket weld"] },
+      "JT-003": { "label": "Slip-on flange",              "geometry": "Moderate", "risk": 0.45, "ifc_keywords": ["slip-on", "slipon", "slip on", "so flange"] },
+      "JT-004": { "label": "Weld neck flange",            "geometry": "Tight",    "risk": 0.75, "ifc_keywords": ["weld neck", "weldneck", "wnrf", "wn flange"] },
+      "JT-005": { "label": "Threaded NPT",                "geometry": "Critical", "risk": 1.00, "ifc_keywords": ["threaded", "npt", "thread"] },
+      "JT-006": { "label": "Compression fitting",         "geometry": "Tight",    "risk": 0.75, "ifc_keywords": ["compression", "compr", "olive"] },
+      "JT-007": { "label": "Push-fit press",              "geometry": "Moderate", "risk": 0.45, "ifc_keywords": ["press fit", "pressfit", "push fit", "pushfit"] },
+      "JT-008": { "label": "Victaulic groove coupling",   "geometry": "Moderate", "risk": 0.45, "ifc_keywords": ["victaulic", "groove", "grooved coupling"] },
+      "JT-009": { "label": "Screwed BSP",                 "geometry": "Critical", "risk": 1.00, "ifc_keywords": ["bsp", "screwed bsp", "bspt"] },
+      "JT-010": { "label": "Lap joint flange",            "geometry": "Tight",    "risk": 0.75, "ifc_keywords": ["lap joint", "lapjoint", "stub end"] },
+      "JT-011": { "label": "Ring-type joint flange",      "geometry": "Tight",    "risk": 0.75, "ifc_keywords": ["rtj", "ring type joint", "ring-type"] },
+      "JT-012": { "label": "Pipe clamp under insulation", "geometry": "Critical", "risk": 1.00, "ifc_keywords": ["under insulation", "clamp", "u-bolt"] },
+      "JT-013": { "label": "Mechanical anchor contact",  "geometry": "Tight",    "risk": 0.75, "ifc_keywords": ["anchor", "mechanical anchor"] },
+      "JT-014": { "label": "Unknown / unclassified",      "geometry": "Tight",    "risk": 0.75, "ifc_keywords": [], "note": "Conservative default when joint type cannot be determined from IFC data" }
+    }
+  },
+  "environment_severity": {
+    "description": "Seven severity classes per EN ISO 15329:2007 wetting classification framework.",
+    "source": "EN ISO 15329:2007",
+    "classes": {
+      "T0_DRY":          { "severity": 0.05, "chloride_mgl": "0",         "label": "Essentially dry — controlled indoor",       "wetness": "< 1% annual" },
+      "T1_OCCASIONAL":   { "severity": 0.20, "chloride_mgl": "< 10",      "label": "Occasional condensation — normal indoor",   "wetness": "< 10% annual" },
+      "T2_INTERMITTENT": { "severity": 0.40, "chloride_mgl": "< 50",      "label": "Intermittent wetting — humid plant room",   "wetness": "10-50% annual" },
+      "T3_FREQUENT":     { "severity": 0.60, "chloride_mgl": "50-200",    "label": "Frequent wetting — external sheltered",     "wetness": "50-75% annual" },
+      "T4_PERSISTENT":   { "severity": 0.80, "chloride_mgl": "200-1000",  "label": "Persistent wetting — external exposed",     "wetness": "> 75% annual" },
+      "T5_IMMERSION":    { "severity": 1.00, "chloride_mgl": "> 1000",    "label": "Immersion / pool / marine — most severe",   "wetness": "continuous" },
+      "BUILDING_SERVICES": { "severity": 0.35, "chloride_mgl": "variable", "label": "Internal building services pipework",       "wetness": "continuous internal", "reference": "CIBSE Guide G" }
+    }
+  },
+  "high_risk_configurations": [
+    {
+      "config_id": "CC-HRC-001",
+      "description": "SS316 flanged connection in pool plant room",
+      "material": "ss316_passive", "joint": "JT-004", "environment": "T5_IMMERSION",
+      "typical_temp_c": 35, "expected_score": 0.89, "expected_band": "Critical",
+      "academic_significance": "GC-001 score 0.00 (Low) — this is the defining finding justifying the dual-engine architecture"
+    },
+    {
+      "config_id": "CC-HRC-002",
+      "description": "SS304 flanged connection in pool enclosure",
+      "material": "ss304_passive", "joint": "JT-004", "environment": "T5_IMMERSION",
+      "typical_temp_c": 25, "expected_score": 0.91, "expected_band": "Critical",
+      "note": "SS304 CCT = -5 degrees C — at risk in any above-freezing environment with chloride"
+    },
+    {
+      "config_id": "CC-HRC-003",
+      "description": "SS316 threaded connection in humid plant room above 40°C",
+      "material": "ss316_passive", "joint": "JT-005", "environment": "T2_INTERMITTENT",
+      "typical_temp_c": 40, "expected_score": 0.85, "expected_band": "Critical",
+      "note": "Threaded joint (Critical geometry) combined with operating above CCT"
+    },
+    {
+      "config_id": "CC-HRC-004",
+      "description": "SS304 compression fitting in normal indoor environment at 15°C",
+      "material": "ss304_passive", "joint": "JT-006", "environment": "T1_OCCASIONAL",
+      "typical_temp_c": 15, "expected_score": 0.66, "expected_band": "High",
+      "note": "SS304 CCT only -5°C — modest temperature still 20°C above CCT"
+    },
+    {
+      "config_id": "CC-HRC-005",
+      "description": "Super Duplex 2507 flanged in pool environment at 45°C",
+      "material": "superduplex2507", "joint": "JT-004", "environment": "T5_IMMERSION",
+      "typical_temp_c": 45, "expected_score": 0.69, "expected_band": "High",
+      "note": "CCT +50°C — only 5°C margin at 45°C operating temperature"
+    }
+  ],
+  "mitigation_catalogue": {
+    "MIT-CC-001": "Upgrade stainless steel grade — specify Duplex 2205 (CCT +25°C) or Super Duplex 2507 (CCT +50°C) per CIRIA C692",
+    "MIT-CC-002": "Change joint type to reduce geometry class — specify butt weld instead of flanged or threaded connection",
+    "MIT-CC-003": "Specify PTFE or elastomer gaskets with minimum crevice geometry at flange interface",
+    "MIT-CC-004": "Apply crevice-resistant surface treatment — electropolishing or passivation per ASTM A967",
+    "MIT-CC-005": "Reduce chloride concentration in operating environment — improve ventilation or drainage",
+    "MIT-CC-006": "Lower operating temperature below material CCT — review system temperature setpoints",
+    "MIT-CC-007": "Specify titanium Grade 2 (CCT +120°C) for elements in permanent high-chloride high-temperature service",
+    "MIT-CC-008": "Implement periodic inspection regime at identified crevice geometry locations"
+  },
+  "pset_crevice_corrosion_risk_schema": {
+    "pset_name": "Pset_CreviceCorrosionRisk",
+    "ifc_entities": ["IfcPipeSegment", "IfcPipeFitting", "IfcFlowSegment"],
+    "properties": [
+      { "name": "CC001_CompositeScore",        "type": "IfcReal",     "description": "CC-001 composite risk score 0.0-1.0" },
+      { "name": "CC001_RiskBand",              "type": "IfcLabel",    "description": "Low / Medium / High / Critical" },
+      { "name": "CC001_JointTypeCode",         "type": "IfcLabel",    "description": "Joint type code JT-001 through JT-014" },
+      { "name": "CC001_GeometryClass",         "type": "IfcLabel",    "description": "Open / Moderate / Tight / Critical" },
+      { "name": "CC001_GeometryRisk",          "type": "IfcReal",     "description": "Geometry risk sub-score 0.0-1.0" },
+      { "name": "CC001_OperatingTemp_C",       "type": "IfcReal",     "description": "Operating temperature in degrees C" },
+      { "name": "CC001_CCT_C",                 "type": "IfcReal",     "description": "Critical Crevice Corrosion Temperature for specified grade" },
+      { "name": "CC001_CCTAdequacyScore",      "type": "IfcReal",     "description": "CCT adequacy sub-score 0.0-1.0" },
+      { "name": "CC001_CCTNote",               "type": "IfcText",     "description": "CCT adequacy explanation and margin" },
+      { "name": "CC001_EnvironmentKey",        "type": "IfcLabel",    "description": "T0_DRY through T5_IMMERSION per EN ISO 15329:2007" },
+      { "name": "CC001_EnvironmentSeverity",   "type": "IfcReal",     "description": "Environment severity score 0.0-1.0" },
+      { "name": "CC001_RecommendedMitigation", "type": "IfcText",     "description": "Pipe-separated mitigation codes" },
+      { "name": "CC001_RulesetVersion",        "type": "IfcLabel",    "description": "BIMGUARD-CC-001 ruleset version" },
+      { "name": "CC001_AssessmentDate",        "type": "IfcDateTime", "description": "ISO 8601 UTC timestamp of assessment" }
+    ]
+  },
+  "ifc_data_sources": {
+    "material":           ["Pset_MaterialCommon.Name", "IfcMaterial.Name"],
+    "joint_type":         ["IfcPipeFitting.PredefinedType", "Pset_PipeFittingOccurrence.ConnectionType", "IfcPipeSegmentType.ObjectType"],
+    "operating_temp":     ["Pset_PipeSegmentOccurrence.OperatingTemperature", "Pset_ZoneCommon.SetPointTemperature"],
+    "zone_category":      ["IfcZone.LongName", "IfcZone.Name", "Pset_ZoneCommon.Category"],
+    "system_type":        ["IfcDistributionSystem.PredefinedType", "IfcDistributionSystem.LongName"]
+  }
+}

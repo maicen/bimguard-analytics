@@ -1,0 +1,1247 @@
+{
+  "1F4KLUGJf1aAa0YXxTvOR5": {
+    "global_id": "1F4KLUGJf1aAa0YXxTvOR5",
+    "element_type": "IfcPipeSegment",
+    "system_type": "road wastewater system",
+    "material": "concrete_reinforced_prefab",
+    "first_seen": "2026-04-09T18:44:13Z",
+    "last_seen": "2026-04-09T18:44:13Z",
+    "current_status": "resolved",
+    "current_band": "Medium",
+    "events": [
+      {
+        "event_id": "0afc84b5",
+        "timestamp": "2026-04-09T18:44:13Z",
+        "event_type": "raised",
+        "risk_band": "Medium",
+        "composite_score": 0.4075,
+        "author": "BIMGUARD AI",
+        "comment": ""
+      },
+      {
+        "event_id": "34a5f915",
+        "timestamp": "2026-04-09T18:47:08Z",
+        "event_type": "resolved",
+        "risk_band": "Medium",
+        "composite_score": 0.0,
+        "author": "BIMGUARD AI",
+        "comment": "Element no longer flagged in compliance run \u2014 marked resolved"
+      }
+    ]
+  },
+  "0uGYOC9Nz33PfGM5uuVHhW": {
+    "global_id": "0uGYOC9Nz33PfGM5uuVHhW",
+    "element_type": "IfcPipeSegment",
+    "system_type": "road wastewater system",
+    "material": "concrete_reinforced_prefab",
+    "first_seen": "2026-04-09T18:44:13Z",
+    "last_seen": "2026-04-09T18:44:13Z",
+    "current_status": "resolved",
+    "current_band": "Medium",
+    "events": [
+      {
+        "event_id": "e3b50860",
+        "timestamp": "2026-04-09T18:44:13Z",
+        "event_type": "raised",
+        "risk_band": "Medium",
+        "composite_score": 0.4075,
+        "author": "BIMGUARD AI",
+        "comment": ""
+      },
+      {
+        "event_id": "2753c4ad",
+        "timestamp": "2026-04-09T18:47:08Z",
+        "event_type": "resolved",
+        "risk_band": "Medium",
+        "composite_score": 0.0,
+        "author": "BIMGUARD AI",
+        "comment": "Element no longer flagged in compliance run \u2014 marked resolved"
+      }
+    ]
+  },
+  "259jK4QKD3OPEdfCl4GH_l": {
+    "global_id": "259jK4QKD3OPEdfCl4GH_l",
+    "element_type": "IfcPipeSegment",
+    "system_type": "road wastewater system",
+    "material": "concrete_reinforced_prefab",
+    "first_seen": "2026-04-09T18:44:13Z",
+    "last_seen": "2026-04-09T18:44:13Z",
+    "current_status": "resolved",
+    "current_band": "Medium",
+    "events": [
+      {
+        "event_id": "f2783c3c",
+        "timestamp": "2026-04-09T18:44:13Z",
+        "event_type": "raised",
+        "risk_band": "Medium",
+        "composite_score": 0.4075,
+        "author": "BIMGUARD AI",
+        "comment": ""
+      },
+      {
+        "event_id": "ddd95d9b",
+        "timestamp": "2026-04-09T18:47:08Z",
+        "event_type": "resolved",
+        "risk_band": "Medium",
+        "composite_score": 0.0,
+        "author": "BIMGUARD AI",
+        "comment": "Element no longer flagged in compliance run \u2014 marked resolved"
+      }
+    ]
+  },
+  "0_AaoqH0fA_wWg2hQ6QoLY": {
+    "global_id": "0_AaoqH0fA_wWg2hQ6QoLY",
+    "element_type": "IfcPipeSegment",
+    "system_type": "road wastewater system",
+    "material": "concrete_reinforced_prefab",
+    "first_seen": "2026-04-09T18:44:13Z",
+    "last_seen": "2026-04-09T18:44:13Z",
+    "current_status": "resolved",
+    "current_band": "Medium",
+    "events": [
+      {
+        "event_id": "43f0fbf5",
+        "timestamp": "2026-04-09T18:44:13Z",
+        "event_type": "raised",
+        "risk_band": "Medium",
+        "composite_score": 0.4075,
+        "author": "BIMGUARD AI",
+        "comment": ""
+      },
+      {
+        "event_id": "473a899e",
+        "timestamp": "2026-04-09T18:47:08Z",
+        "event_type": "resolved",
+        "risk_band": "Medium",
+        "composite_score": 0.0,
+        "author": "BIMGUARD AI",
+        "comment": "Element no longer flagged in compliance run \u2014 marked resolved"
+      }
+    ]
+  },
+  "0X_fsZ0Kj9a8olHcZQNbJM": {
+    "global_id": "0X_fsZ0Kj9a8olHcZQNbJM",
+    "element_type": "IfcPipeSegment",
+    "system_type": "road wastewater system",
+    "material": "concrete_reinforced_prefab",
+    "first_seen": "2026-04-09T18:44:13Z",
+    "last_seen": "2026-04-09T18:44:13Z",
+    "current_status": "resolved",
+    "current_band": "Medium",
+    "events": [
+      {
+        "event_id": "5c1d392d",
+        "timestamp": "2026-04-09T18:44:13Z",
+        "event_type": "raised",
+        "risk_band": "Medium",
+        "composite_score": 0.4075,
+        "author": "BIMGUARD AI",
+        "comment": ""
+      },
+      {
+        "event_id": "f909ee92",
+        "timestamp": "2026-04-09T18:47:08Z",
+        "event_type": "resolved",
+        "risk_band": "Medium",
+        "composite_score": 0.0,
+        "author": "BIMGUARD AI",
+        "comment": "Element no longer flagged in compliance run \u2014 marked resolved"
+      }
+    ]
+  },
+  "3Awuj1sjH8ERw7F1J6oBZs": {
+    "global_id": "3Awuj1sjH8ERw7F1J6oBZs",
+    "element_type": "IfcPipeSegment",
+    "system_type": "road wastewater system",
+    "material": "concrete_reinforced_prefab",
+    "first_seen": "2026-04-09T18:44:13Z",
+    "last_seen": "2026-04-09T18:44:13Z",
+    "current_status": "resolved",
+    "current_band": "Medium",
+    "events": [
+      {
+        "event_id": "ad7ae7f8",
+        "timestamp": "2026-04-09T18:44:13Z",
+        "event_type": "raised",
+        "risk_band": "Medium",
+        "composite_score": 0.4075,
+        "author": "BIMGUARD AI",
+        "comment": ""
+      },
+      {
+        "event_id": "c499b4f7",
+        "timestamp": "2026-04-09T18:47:08Z",
+        "event_type": "resolved",
+        "risk_band": "Medium",
+        "composite_score": 0.0,
+        "author": "BIMGUARD AI",
+        "comment": "Element no longer flagged in compliance run \u2014 marked resolved"
+      }
+    ]
+  },
+  "3D4ahkhjP7dujyPNisZ2F$": {
+    "global_id": "3D4ahkhjP7dujyPNisZ2F$",
+    "element_type": "IfcPipeSegment",
+    "system_type": "road wastewater system",
+    "material": "concrete_reinforced_prefab",
+    "first_seen": "2026-04-09T18:44:13Z",
+    "last_seen": "2026-04-09T18:44:13Z",
+    "current_status": "resolved",
+    "current_band": "Medium",
+    "events": [
+      {
+        "event_id": "7167a485",
+        "timestamp": "2026-04-09T18:44:13Z",
+        "event_type": "raised",
+        "risk_band": "Medium",
+        "composite_score": 0.4075,
+        "author": "BIMGUARD AI",
+        "comment": ""
+      },
+      {
+        "event_id": "e2b7164f",
+        "timestamp": "2026-04-09T18:47:08Z",
+        "event_type": "resolved",
+        "risk_band": "Medium",
+        "composite_score": 0.0,
+        "author": "BIMGUARD AI",
+        "comment": "Element no longer flagged in compliance run \u2014 marked resolved"
+      }
+    ]
+  },
+  "0FQ6pMwzXBJucYaRTqfuw2": {
+    "global_id": "0FQ6pMwzXBJucYaRTqfuw2",
+    "element_type": "IfcPipeSegment",
+    "system_type": "road wastewater system",
+    "material": "concrete_reinforced_prefab",
+    "first_seen": "2026-04-09T18:44:13Z",
+    "last_seen": "2026-04-09T18:44:13Z",
+    "current_status": "resolved",
+    "current_band": "Medium",
+    "events": [
+      {
+        "event_id": "90a6965a",
+        "timestamp": "2026-04-09T18:44:13Z",
+        "event_type": "raised",
+        "risk_band": "Medium",
+        "composite_score": 0.4075,
+        "author": "BIMGUARD AI",
+        "comment": ""
+      },
+      {
+        "event_id": "b74a1703",
+        "timestamp": "2026-04-09T18:47:08Z",
+        "event_type": "resolved",
+        "risk_band": "Medium",
+        "composite_score": 0.0,
+        "author": "BIMGUARD AI",
+        "comment": "Element no longer flagged in compliance run \u2014 marked resolved"
+      }
+    ]
+  },
+  "0yh8Z9_qzCIgcsXg7r4Ix6": {
+    "global_id": "0yh8Z9_qzCIgcsXg7r4Ix6",
+    "element_type": "IfcPipeSegment",
+    "system_type": "road wastewater system",
+    "material": "concrete_reinforced_prefab",
+    "first_seen": "2026-04-09T18:44:13Z",
+    "last_seen": "2026-04-09T18:44:13Z",
+    "current_status": "resolved",
+    "current_band": "Medium",
+    "events": [
+      {
+        "event_id": "cd62cde0",
+        "timestamp": "2026-04-09T18:44:13Z",
+        "event_type": "raised",
+        "risk_band": "Medium",
+        "composite_score": 0.4075,
+        "author": "BIMGUARD AI",
+        "comment": ""
+      },
+      {
+        "event_id": "adbd98a7",
+        "timestamp": "2026-04-09T18:47:08Z",
+        "event_type": "resolved",
+        "risk_band": "Medium",
+        "composite_score": 0.0,
+        "author": "BIMGUARD AI",
+        "comment": "Element no longer flagged in compliance run \u2014 marked resolved"
+      }
+    ]
+  },
+  "1PI8m4Ts17Z8hvG889Pb1i": {
+    "global_id": "1PI8m4Ts17Z8hvG889Pb1i",
+    "element_type": "IfcPipeSegment",
+    "system_type": "road wastewater system",
+    "material": "concrete_reinforced_prefab",
+    "first_seen": "2026-04-09T18:44:13Z",
+    "last_seen": "2026-04-09T18:44:13Z",
+    "current_status": "resolved",
+    "current_band": "Medium",
+    "events": [
+      {
+        "event_id": "ef787585",
+        "timestamp": "2026-04-09T18:44:13Z",
+        "event_type": "raised",
+        "risk_band": "Medium",
+        "composite_score": 0.4075,
+        "author": "BIMGUARD AI",
+        "comment": ""
+      },
+      {
+        "event_id": "19052b96",
+        "timestamp": "2026-04-09T18:47:08Z",
+        "event_type": "resolved",
+        "risk_band": "Medium",
+        "composite_score": 0.0,
+        "author": "BIMGUARD AI",
+        "comment": "Element no longer flagged in compliance run \u2014 marked resolved"
+      }
+    ]
+  },
+  "398dvTdH9FKwML6pMEemhK": {
+    "global_id": "398dvTdH9FKwML6pMEemhK",
+    "element_type": "IfcPipeSegment",
+    "system_type": "road wastewater system",
+    "material": "concrete_reinforced_prefab",
+    "first_seen": "2026-04-09T18:44:13Z",
+    "last_seen": "2026-04-09T18:44:13Z",
+    "current_status": "resolved",
+    "current_band": "Medium",
+    "events": [
+      {
+        "event_id": "da80e252",
+        "timestamp": "2026-04-09T18:44:13Z",
+        "event_type": "raised",
+        "risk_band": "Medium",
+        "composite_score": 0.4075,
+        "author": "BIMGUARD AI",
+        "comment": ""
+      },
+      {
+        "event_id": "352443dc",
+        "timestamp": "2026-04-09T18:47:08Z",
+        "event_type": "resolved",
+        "risk_band": "Medium",
+        "composite_score": 0.0,
+        "author": "BIMGUARD AI",
+        "comment": "Element no longer flagged in compliance run \u2014 marked resolved"
+      }
+    ]
+  },
+  "0tZgj2n4j7neNsQ08k3WsT": {
+    "global_id": "0tZgj2n4j7neNsQ08k3WsT",
+    "element_type": "IfcPipeSegment",
+    "system_type": "road wastewater system",
+    "material": "concrete_reinforced_prefab",
+    "first_seen": "2026-04-09T18:44:13Z",
+    "last_seen": "2026-04-09T18:44:13Z",
+    "current_status": "resolved",
+    "current_band": "Medium",
+    "events": [
+      {
+        "event_id": "f1893d82",
+        "timestamp": "2026-04-09T18:44:13Z",
+        "event_type": "raised",
+        "risk_band": "Medium",
+        "composite_score": 0.4075,
+        "author": "BIMGUARD AI",
+        "comment": ""
+      },
+      {
+        "event_id": "f901fe88",
+        "timestamp": "2026-04-09T18:47:08Z",
+        "event_type": "resolved",
+        "risk_band": "Medium",
+        "composite_score": 0.0,
+        "author": "BIMGUARD AI",
+        "comment": "Element no longer flagged in compliance run \u2014 marked resolved"
+      }
+    ]
+  },
+  "22Xr2mF15CbQCVR$W_$VLh": {
+    "global_id": "22Xr2mF15CbQCVR$W_$VLh",
+    "element_type": "IfcPipeSegment",
+    "system_type": "road wastewater system",
+    "material": "concrete_reinforced_prefab",
+    "first_seen": "2026-04-09T18:44:13Z",
+    "last_seen": "2026-04-09T18:44:13Z",
+    "current_status": "resolved",
+    "current_band": "Medium",
+    "events": [
+      {
+        "event_id": "c4894d11",
+        "timestamp": "2026-04-09T18:44:13Z",
+        "event_type": "raised",
+        "risk_band": "Medium",
+        "composite_score": 0.4075,
+        "author": "BIMGUARD AI",
+        "comment": ""
+      },
+      {
+        "event_id": "9b2d8db7",
+        "timestamp": "2026-04-09T18:47:08Z",
+        "event_type": "resolved",
+        "risk_band": "Medium",
+        "composite_score": 0.0,
+        "author": "BIMGUARD AI",
+        "comment": "Element no longer flagged in compliance run \u2014 marked resolved"
+      }
+    ]
+  },
+  "1wwTT4jtX3C9e82mYC6YGT": {
+    "global_id": "1wwTT4jtX3C9e82mYC6YGT",
+    "element_type": "IfcPipeSegment",
+    "system_type": "road wastewater system",
+    "material": "concrete_reinforced_prefab",
+    "first_seen": "2026-04-09T18:44:13Z",
+    "last_seen": "2026-04-09T18:44:13Z",
+    "current_status": "resolved",
+    "current_band": "Medium",
+    "events": [
+      {
+        "event_id": "eb76e367",
+        "timestamp": "2026-04-09T18:44:13Z",
+        "event_type": "raised",
+        "risk_band": "Medium",
+        "composite_score": 0.4075,
+        "author": "BIMGUARD AI",
+        "comment": ""
+      },
+      {
+        "event_id": "e8d0b37c",
+        "timestamp": "2026-04-09T18:47:08Z",
+        "event_type": "resolved",
+        "risk_band": "Medium",
+        "composite_score": 0.0,
+        "author": "BIMGUARD AI",
+        "comment": "Element no longer flagged in compliance run \u2014 marked resolved"
+      }
+    ]
+  },
+  "1GXiy3xWf0fOQdC$gO8JfW": {
+    "global_id": "1GXiy3xWf0fOQdC$gO8JfW",
+    "element_type": "IfcPipeSegment",
+    "system_type": "road wastewater system",
+    "material": "concrete_reinforced_prefab",
+    "first_seen": "2026-04-09T18:44:13Z",
+    "last_seen": "2026-04-09T18:44:13Z",
+    "current_status": "resolved",
+    "current_band": "Medium",
+    "events": [
+      {
+        "event_id": "7043a589",
+        "timestamp": "2026-04-09T18:44:13Z",
+        "event_type": "raised",
+        "risk_band": "Medium",
+        "composite_score": 0.4075,
+        "author": "BIMGUARD AI",
+        "comment": ""
+      },
+      {
+        "event_id": "fe7ce517",
+        "timestamp": "2026-04-09T18:47:08Z",
+        "event_type": "resolved",
+        "risk_band": "Medium",
+        "composite_score": 0.0,
+        "author": "BIMGUARD AI",
+        "comment": "Element no longer flagged in compliance run \u2014 marked resolved"
+      }
+    ]
+  },
+  "0URFt4JXXD6OjZF8OrkR8N": {
+    "global_id": "0URFt4JXXD6OjZF8OrkR8N",
+    "element_type": "IfcPipeSegment",
+    "system_type": "road wastewater system",
+    "material": "concrete_reinforced_prefab",
+    "first_seen": "2026-04-09T18:44:13Z",
+    "last_seen": "2026-04-09T18:44:13Z",
+    "current_status": "resolved",
+    "current_band": "Medium",
+    "events": [
+      {
+        "event_id": "d5284ac1",
+        "timestamp": "2026-04-09T18:44:13Z",
+        "event_type": "raised",
+        "risk_band": "Medium",
+        "composite_score": 0.4075,
+        "author": "BIMGUARD AI",
+        "comment": ""
+      },
+      {
+        "event_id": "eefd4754",
+        "timestamp": "2026-04-09T18:47:08Z",
+        "event_type": "resolved",
+        "risk_band": "Medium",
+        "composite_score": 0.0,
+        "author": "BIMGUARD AI",
+        "comment": "Element no longer flagged in compliance run \u2014 marked resolved"
+      }
+    ]
+  },
+  "1kpVA_DFf3PRJR$l8yqtLr": {
+    "global_id": "1kpVA_DFf3PRJR$l8yqtLr",
+    "element_type": "IfcPipeSegment",
+    "system_type": "road wastewater system",
+    "material": "concrete_reinforced_prefab",
+    "first_seen": "2026-04-09T18:44:13Z",
+    "last_seen": "2026-04-09T18:44:13Z",
+    "current_status": "resolved",
+    "current_band": "Medium",
+    "events": [
+      {
+        "event_id": "8f516cac",
+        "timestamp": "2026-04-09T18:44:13Z",
+        "event_type": "raised",
+        "risk_band": "Medium",
+        "composite_score": 0.4075,
+        "author": "BIMGUARD AI",
+        "comment": ""
+      },
+      {
+        "event_id": "a697326e",
+        "timestamp": "2026-04-09T18:47:08Z",
+        "event_type": "resolved",
+        "risk_band": "Medium",
+        "composite_score": 0.0,
+        "author": "BIMGUARD AI",
+        "comment": "Element no longer flagged in compliance run \u2014 marked resolved"
+      }
+    ]
+  },
+  "3ctB5z6nHCoQBWFJYnFhI5": {
+    "global_id": "3ctB5z6nHCoQBWFJYnFhI5",
+    "element_type": "IfcPipeSegment",
+    "system_type": "road wastewater system",
+    "material": "concrete_reinforced_prefab",
+    "first_seen": "2026-04-09T18:44:13Z",
+    "last_seen": "2026-04-09T18:44:13Z",
+    "current_status": "resolved",
+    "current_band": "Medium",
+    "events": [
+      {
+        "event_id": "56d2d32f",
+        "timestamp": "2026-04-09T18:44:13Z",
+        "event_type": "raised",
+        "risk_band": "Medium",
+        "composite_score": 0.4075,
+        "author": "BIMGUARD AI",
+        "comment": ""
+      },
+      {
+        "event_id": "960f1e28",
+        "timestamp": "2026-04-09T18:47:08Z",
+        "event_type": "resolved",
+        "risk_band": "Medium",
+        "composite_score": 0.0,
+        "author": "BIMGUARD AI",
+        "comment": "Element no longer flagged in compliance run \u2014 marked resolved"
+      }
+    ]
+  },
+  "11LWvWX7HAOghcDUC_Fsn5": {
+    "global_id": "11LWvWX7HAOghcDUC_Fsn5",
+    "element_type": "IfcPipeSegment",
+    "system_type": "road wastewater system",
+    "material": "concrete_reinforced_prefab",
+    "first_seen": "2026-04-09T18:44:13Z",
+    "last_seen": "2026-04-09T18:44:13Z",
+    "current_status": "resolved",
+    "current_band": "Medium",
+    "events": [
+      {
+        "event_id": "e4a65927",
+        "timestamp": "2026-04-09T18:44:13Z",
+        "event_type": "raised",
+        "risk_band": "Medium",
+        "composite_score": 0.4075,
+        "author": "BIMGUARD AI",
+        "comment": ""
+      },
+      {
+        "event_id": "525dd7d3",
+        "timestamp": "2026-04-09T18:47:08Z",
+        "event_type": "resolved",
+        "risk_band": "Medium",
+        "composite_score": 0.0,
+        "author": "BIMGUARD AI",
+        "comment": "Element no longer flagged in compliance run \u2014 marked resolved"
+      }
+    ]
+  },
+  "2L8jfzclb09OjhbeQoBDvs": {
+    "global_id": "2L8jfzclb09OjhbeQoBDvs",
+    "element_type": "IfcPipeSegment",
+    "system_type": "road wastewater system",
+    "material": "concrete_reinforced_prefab",
+    "first_seen": "2026-04-09T18:44:13Z",
+    "last_seen": "2026-04-09T18:44:13Z",
+    "current_status": "resolved",
+    "current_band": "Medium",
+    "events": [
+      {
+        "event_id": "65357f21",
+        "timestamp": "2026-04-09T18:44:13Z",
+        "event_type": "raised",
+        "risk_band": "Medium",
+        "composite_score": 0.4075,
+        "author": "BIMGUARD AI",
+        "comment": ""
+      },
+      {
+        "event_id": "e09f2679",
+        "timestamp": "2026-04-09T18:47:08Z",
+        "event_type": "resolved",
+        "risk_band": "Medium",
+        "composite_score": 0.0,
+        "author": "BIMGUARD AI",
+        "comment": "Element no longer flagged in compliance run \u2014 marked resolved"
+      }
+    ]
+  },
+  "0SESIjUgvFsOoEqvCaV5Br": {
+    "global_id": "0SESIjUgvFsOoEqvCaV5Br",
+    "element_type": "IfcPipeSegment",
+    "system_type": "road wastewater system",
+    "material": "concrete_reinforced_prefab",
+    "first_seen": "2026-04-09T18:44:13Z",
+    "last_seen": "2026-04-09T18:44:13Z",
+    "current_status": "resolved",
+    "current_band": "Medium",
+    "events": [
+      {
+        "event_id": "3f281fb5",
+        "timestamp": "2026-04-09T18:44:13Z",
+        "event_type": "raised",
+        "risk_band": "Medium",
+        "composite_score": 0.4075,
+        "author": "BIMGUARD AI",
+        "comment": ""
+      },
+      {
+        "event_id": "f25ee45e",
+        "timestamp": "2026-04-09T18:47:08Z",
+        "event_type": "resolved",
+        "risk_band": "Medium",
+        "composite_score": 0.0,
+        "author": "BIMGUARD AI",
+        "comment": "Element no longer flagged in compliance run \u2014 marked resolved"
+      }
+    ]
+  },
+  "1FDcvNA_L4dfRDGP$UNpz1": {
+    "global_id": "1FDcvNA_L4dfRDGP$UNpz1",
+    "element_type": "IfcPipeSegment",
+    "system_type": "road wastewater system",
+    "material": "concrete_reinforced_prefab",
+    "first_seen": "2026-04-09T18:44:13Z",
+    "last_seen": "2026-04-09T18:44:13Z",
+    "current_status": "resolved",
+    "current_band": "Medium",
+    "events": [
+      {
+        "event_id": "8b28b69f",
+        "timestamp": "2026-04-09T18:44:13Z",
+        "event_type": "raised",
+        "risk_band": "Medium",
+        "composite_score": 0.4075,
+        "author": "BIMGUARD AI",
+        "comment": ""
+      },
+      {
+        "event_id": "a1aa0795",
+        "timestamp": "2026-04-09T18:47:08Z",
+        "event_type": "resolved",
+        "risk_band": "Medium",
+        "composite_score": 0.0,
+        "author": "BIMGUARD AI",
+        "comment": "Element no longer flagged in compliance run \u2014 marked resolved"
+      }
+    ]
+  },
+  "0RPLlDbKvCJwFzsj8RPg4X": {
+    "global_id": "0RPLlDbKvCJwFzsj8RPg4X",
+    "element_type": "IfcPipeSegment",
+    "system_type": "road wastewater system",
+    "material": "concrete_reinforced_prefab",
+    "first_seen": "2026-04-09T18:44:13Z",
+    "last_seen": "2026-04-09T18:44:13Z",
+    "current_status": "resolved",
+    "current_band": "Medium",
+    "events": [
+      {
+        "event_id": "b9716788",
+        "timestamp": "2026-04-09T18:44:13Z",
+        "event_type": "raised",
+        "risk_band": "Medium",
+        "composite_score": 0.4075,
+        "author": "BIMGUARD AI",
+        "comment": ""
+      },
+      {
+        "event_id": "391c2cb0",
+        "timestamp": "2026-04-09T18:47:08Z",
+        "event_type": "resolved",
+        "risk_band": "Medium",
+        "composite_score": 0.0,
+        "author": "BIMGUARD AI",
+        "comment": "Element no longer flagged in compliance run \u2014 marked resolved"
+      }
+    ]
+  },
+  "1PYbWto7LA0hTpEdNPg6Df": {
+    "global_id": "1PYbWto7LA0hTpEdNPg6Df",
+    "element_type": "IfcPipeSegment",
+    "system_type": "road wastewater system",
+    "material": "concrete_reinforced_prefab",
+    "first_seen": "2026-04-09T18:44:13Z",
+    "last_seen": "2026-04-09T18:44:13Z",
+    "current_status": "resolved",
+    "current_band": "Medium",
+    "events": [
+      {
+        "event_id": "3c84d835",
+        "timestamp": "2026-04-09T18:44:13Z",
+        "event_type": "raised",
+        "risk_band": "Medium",
+        "composite_score": 0.4075,
+        "author": "BIMGUARD AI",
+        "comment": ""
+      },
+      {
+        "event_id": "632fdd66",
+        "timestamp": "2026-04-09T18:47:08Z",
+        "event_type": "resolved",
+        "risk_band": "Medium",
+        "composite_score": 0.0,
+        "author": "BIMGUARD AI",
+        "comment": "Element no longer flagged in compliance run \u2014 marked resolved"
+      }
+    ]
+  },
+  "BBC71047-8F05-4B87-BBF": {
+    "global_id": "BBC71047-8F05-4B87-BBF",
+    "element_type": "IfcPipeSegment",
+    "system_type": "Chilled Water",
+    "material": "SS_316_passive",
+    "first_seen": "2026-04-09T18:47:08Z",
+    "last_seen": "2026-04-09T18:47:08Z",
+    "current_status": "open",
+    "current_band": "High",
+    "events": [
+      {
+        "event_id": "589f4854",
+        "timestamp": "2026-04-09T18:47:08Z",
+        "event_type": "raised",
+        "risk_band": "High",
+        "composite_score": 0.69,
+        "author": "BIMGUARD AI",
+        "comment": ""
+      }
+    ]
+  },
+  "D6AA94A4-2E25-4B80-B20": {
+    "global_id": "D6AA94A4-2E25-4B80-B20",
+    "element_type": "IfcPipeSegment",
+    "system_type": "Hot Water Services",
+    "material": "Copper",
+    "first_seen": "2026-04-09T18:47:08Z",
+    "last_seen": "2026-04-09T18:47:08Z",
+    "current_status": "open",
+    "current_band": "High",
+    "events": [
+      {
+        "event_id": "b8670df9",
+        "timestamp": "2026-04-09T18:47:08Z",
+        "event_type": "raised",
+        "risk_band": "High",
+        "composite_score": 0.69,
+        "author": "BIMGUARD AI",
+        "comment": ""
+      }
+    ]
+  },
+  "8D7BBAE1-449D-42CF-856": {
+    "global_id": "8D7BBAE1-449D-42CF-856",
+    "element_type": "IfcPipeSegment",
+    "system_type": "Pool Heating",
+    "material": "SS_316_passive",
+    "first_seen": "2026-04-09T18:47:08Z",
+    "last_seen": "2026-04-09T18:47:08Z",
+    "current_status": "open",
+    "current_band": "Critical",
+    "events": [
+      {
+        "event_id": "a2d9bfcb",
+        "timestamp": "2026-04-09T18:47:08Z",
+        "event_type": "raised",
+        "risk_band": "Critical",
+        "composite_score": 0.8875,
+        "author": "BIMGUARD AI",
+        "comment": ""
+      }
+    ]
+  },
+  "AF059F09-81B3-4FE1-A60": {
+    "global_id": "AF059F09-81B3-4FE1-A60",
+    "element_type": "IfcPipeFitting",
+    "system_type": "Pool Heating",
+    "material": "SS_316_passive",
+    "first_seen": "2026-04-09T18:47:08Z",
+    "last_seen": "2026-04-09T18:47:08Z",
+    "current_status": "open",
+    "current_band": "Critical",
+    "events": [
+      {
+        "event_id": "0a753887",
+        "timestamp": "2026-04-09T18:47:08Z",
+        "event_type": "raised",
+        "risk_band": "Critical",
+        "composite_score": 0.8875,
+        "author": "BIMGUARD AI",
+        "comment": ""
+      }
+    ]
+  },
+  "ED8966AE-2A1F-4C8B-9D9": {
+    "global_id": "ED8966AE-2A1F-4C8B-9D9",
+    "element_type": "IfcFastener",
+    "system_type": "Facade",
+    "material": "Aluminum_alloy_6063",
+    "first_seen": "2026-04-09T18:47:08Z",
+    "last_seen": "2026-04-09T18:47:08Z",
+    "current_status": "open",
+    "current_band": "Critical",
+    "events": [
+      {
+        "event_id": "c5369720",
+        "timestamp": "2026-04-09T18:47:08Z",
+        "event_type": "raised",
+        "risk_band": "Critical",
+        "composite_score": 0.96,
+        "author": "BIMGUARD AI",
+        "comment": ""
+      }
+    ]
+  },
+  "BAF273AA-4557-4598-A62": {
+    "global_id": "BAF273AA-4557-4598-A62",
+    "element_type": "IfcFastener",
+    "system_type": "Drainage",
+    "material": "Galvanized_steel",
+    "first_seen": "2026-04-09T18:47:08Z",
+    "last_seen": "2026-04-09T18:47:08Z",
+    "current_status": "open",
+    "current_band": "High",
+    "events": [
+      {
+        "event_id": "1845b399",
+        "timestamp": "2026-04-09T18:47:08Z",
+        "event_type": "raised",
+        "risk_band": "High",
+        "composite_score": 0.82,
+        "author": "BIMGUARD AI",
+        "comment": ""
+      }
+    ]
+  },
+  "503AA852-EC9B-4FDB-A81": {
+    "global_id": "503AA852-EC9B-4FDB-A81",
+    "element_type": "IfcMember",
+    "system_type": "Structure",
+    "material": "Carbon_steel_mild",
+    "first_seen": "2026-04-09T18:47:08Z",
+    "last_seen": "2026-04-09T18:47:08Z",
+    "current_status": "open",
+    "current_band": "High",
+    "events": [
+      {
+        "event_id": "54774c35",
+        "timestamp": "2026-04-09T18:47:08Z",
+        "event_type": "raised",
+        "risk_band": "High",
+        "composite_score": 0.73,
+        "author": "BIMGUARD AI",
+        "comment": ""
+      }
+    ]
+  },
+  "6F89DF81-4F86-4790-B8C": {
+    "global_id": "6F89DF81-4F86-4790-B8C",
+    "element_type": "IfcPipeSegment",
+    "system_type": "CWS",
+    "material": "Copper",
+    "first_seen": "2026-04-09T18:47:08Z",
+    "last_seen": "2026-04-09T18:47:08Z",
+    "current_status": "open",
+    "current_band": "Medium",
+    "events": [
+      {
+        "event_id": "58d52631",
+        "timestamp": "2026-04-09T18:47:08Z",
+        "event_type": "raised",
+        "risk_band": "Medium",
+        "composite_score": 0.4767,
+        "author": "BIMGUARD AI",
+        "comment": ""
+      }
+    ]
+  },
+  "7323090D-60BF-4063-864": {
+    "global_id": "7323090D-60BF-4063-864",
+    "element_type": "IfcPipeSegment",
+    "system_type": "Chilled Water",
+    "material": "SS_316_passive",
+    "first_seen": "2026-04-09T18:47:08Z",
+    "last_seen": "2026-04-09T18:47:08Z",
+    "current_status": "open",
+    "current_band": "Medium",
+    "events": [
+      {
+        "event_id": "612da8fc",
+        "timestamp": "2026-04-09T18:47:08Z",
+        "event_type": "raised",
+        "risk_band": "Medium",
+        "composite_score": 0.31,
+        "author": "BIMGUARD AI",
+        "comment": ""
+      }
+    ]
+  },
+  "EC67D720-4F7C-4EFD-9FC": {
+    "global_id": "EC67D720-4F7C-4EFD-9FC",
+    "element_type": "IfcPipeSegment",
+    "system_type": "External Services",
+    "material": "SS_316_passive",
+    "first_seen": "2026-04-09T18:47:08Z",
+    "last_seen": "2026-04-09T18:47:08Z",
+    "current_status": "open",
+    "current_band": "Critical",
+    "events": [
+      {
+        "event_id": "ec638b57",
+        "timestamp": "2026-04-09T18:47:08Z",
+        "event_type": "raised",
+        "risk_band": "Critical",
+        "composite_score": 0.875,
+        "author": "BIMGUARD AI",
+        "comment": ""
+      }
+    ]
+  },
+  "4B137C34-0617-4DD4-B6D": {
+    "global_id": "4B137C34-0617-4DD4-B6D",
+    "element_type": "IfcHeatExchanger",
+    "system_type": "Pool Heating",
+    "material": "SS_316_passive",
+    "first_seen": "2026-04-09T18:47:08Z",
+    "last_seen": "2026-04-09T18:47:08Z",
+    "current_status": "open",
+    "current_band": "Critical",
+    "events": [
+      {
+        "event_id": "24383785",
+        "timestamp": "2026-04-09T18:47:08Z",
+        "event_type": "raised",
+        "risk_band": "Critical",
+        "composite_score": 0.975,
+        "author": "BIMGUARD AI",
+        "comment": ""
+      }
+    ]
+  },
+  "474B2DD3-A61D-414B-BED": {
+    "global_id": "474B2DD3-A61D-414B-BED",
+    "element_type": "IfcPipeFitting",
+    "system_type": "Drainage",
+    "material": "Cast_iron",
+    "first_seen": "2026-04-09T18:47:08Z",
+    "last_seen": "2026-04-09T18:47:08Z",
+    "current_status": "open",
+    "current_band": "Medium",
+    "events": [
+      {
+        "event_id": "5703c4df",
+        "timestamp": "2026-04-09T18:47:08Z",
+        "event_type": "raised",
+        "risk_band": "Medium",
+        "composite_score": 0.4767,
+        "author": "BIMGUARD AI",
+        "comment": ""
+      }
+    ]
+  },
+  "43E1B7D4-E7BA-4A2B-A99": {
+    "global_id": "43E1B7D4-E7BA-4A2B-A99",
+    "element_type": "IfcPipeSegment",
+    "system_type": "Gas",
+    "material": "Carbon_steel_mild",
+    "first_seen": "2026-04-09T18:47:08Z",
+    "last_seen": "2026-04-09T18:47:08Z",
+    "current_status": "open",
+    "current_band": "Medium",
+    "events": [
+      {
+        "event_id": "3f80e58a",
+        "timestamp": "2026-04-09T18:47:08Z",
+        "event_type": "raised",
+        "risk_band": "Medium",
+        "composite_score": 0.4575,
+        "author": "BIMGUARD AI",
+        "comment": ""
+      }
+    ]
+  },
+  "4E003109-A258-44C2-A03": {
+    "global_id": "4E003109-A258-44C2-A03",
+    "element_type": "IfcPipeSegment",
+    "system_type": "Marine Services",
+    "material": "SS_316_passive",
+    "first_seen": "2026-04-09T18:47:08Z",
+    "last_seen": "2026-04-09T18:47:08Z",
+    "current_status": "open",
+    "current_band": "Critical",
+    "events": [
+      {
+        "event_id": "a35b8da2",
+        "timestamp": "2026-04-09T18:47:08Z",
+        "event_type": "raised",
+        "risk_band": "Critical",
+        "composite_score": 0.9125,
+        "author": "BIMGUARD AI",
+        "comment": ""
+      }
+    ]
+  },
+  "6D3CA398-AAE8-4E8C-807": {
+    "global_id": "6D3CA398-AAE8-4E8C-807",
+    "element_type": "IfcDistributionElement",
+    "system_type": "Electrical",
+    "material": "Aluminum_alloy_6063",
+    "first_seen": "2026-04-09T18:47:08Z",
+    "last_seen": "2026-04-09T18:47:08Z",
+    "current_status": "open",
+    "current_band": "Medium",
+    "events": [
+      {
+        "event_id": "515997c3",
+        "timestamp": "2026-04-09T18:47:08Z",
+        "event_type": "raised",
+        "risk_band": "Medium",
+        "composite_score": 0.4575,
+        "author": "BIMGUARD AI",
+        "comment": ""
+      }
+    ]
+  },
+  "9E06B76F-1341-4CA9-9D1": {
+    "global_id": "9E06B76F-1341-4CA9-9D1",
+    "element_type": "IfcDuctSegment",
+    "system_type": "Ventilation",
+    "material": "Galvanized_steel",
+    "first_seen": "2026-04-09T18:47:08Z",
+    "last_seen": "2026-04-09T18:47:08Z",
+    "current_status": "open",
+    "current_band": "Medium",
+    "events": [
+      {
+        "event_id": "ede84843",
+        "timestamp": "2026-04-09T18:47:08Z",
+        "event_type": "raised",
+        "risk_band": "Medium",
+        "composite_score": 0.4075,
+        "author": "BIMGUARD AI",
+        "comment": ""
+      }
+    ]
+  },
+  "8ACF81E9-373D-4AF0-BE2": {
+    "global_id": "8ACF81E9-373D-4AF0-BE2",
+    "element_type": "IfcPipeSegment",
+    "system_type": "Cooling",
+    "material": "Copper",
+    "first_seen": "2026-04-09T18:47:08Z",
+    "last_seen": "2026-04-09T18:47:08Z",
+    "current_status": "open",
+    "current_band": "High",
+    "events": [
+      {
+        "event_id": "21b1df20",
+        "timestamp": "2026-04-09T18:47:08Z",
+        "event_type": "raised",
+        "risk_band": "High",
+        "composite_score": 0.73,
+        "author": "BIMGUARD AI",
+        "comment": ""
+      }
+    ]
+  },
+  "FBD11737-24CB-4B36-90B": {
+    "global_id": "FBD11737-24CB-4B36-90B",
+    "element_type": "IfcPlate",
+    "system_type": "Facade",
+    "material": "SS_316_passive",
+    "first_seen": "2026-04-09T18:47:08Z",
+    "last_seen": "2026-04-09T18:47:08Z",
+    "current_status": "open",
+    "current_band": "Critical",
+    "events": [
+      {
+        "event_id": "6b8f9fcd",
+        "timestamp": "2026-04-09T18:47:08Z",
+        "event_type": "raised",
+        "risk_band": "Critical",
+        "composite_score": 0.9625,
+        "author": "BIMGUARD AI",
+        "comment": ""
+      }
+    ]
+  },
+  "79A54E79-23C9-44E9-A72": {
+    "global_id": "79A54E79-23C9-44E9-A72",
+    "element_type": "IfcPipeSegment",
+    "system_type": "Fire Protection",
+    "material": "Carbon_steel_mild",
+    "first_seen": "2026-04-09T18:47:08Z",
+    "last_seen": "2026-04-09T18:47:08Z",
+    "current_status": "open",
+    "current_band": "High",
+    "events": [
+      {
+        "event_id": "a710926a",
+        "timestamp": "2026-04-09T18:47:08Z",
+        "event_type": "raised",
+        "risk_band": "High",
+        "composite_score": 0.69,
+        "author": "BIMGUARD AI",
+        "comment": ""
+      }
+    ]
+  },
+  "E4BDCAE2-C83F-4218-86C": {
+    "global_id": "E4BDCAE2-C83F-4218-86C",
+    "element_type": "IfcPipeSegment",
+    "system_type": "Domestic Hot Water",
+    "material": "SS_304_passive",
+    "first_seen": "2026-04-09T18:47:08Z",
+    "last_seen": "2026-04-09T18:47:08Z",
+    "current_status": "open",
+    "current_band": "High",
+    "events": [
+      {
+        "event_id": "c7f3f9bd",
+        "timestamp": "2026-04-09T18:47:08Z",
+        "event_type": "raised",
+        "risk_band": "High",
+        "composite_score": 0.7375,
+        "author": "BIMGUARD AI",
+        "comment": ""
+      }
+    ]
+  },
+  "D99B1FEF-C775-48C0-855": {
+    "global_id": "D99B1FEF-C775-48C0-855",
+    "element_type": "IfcValve",
+    "system_type": "Pool Heating",
+    "material": "SS_304_passive",
+    "first_seen": "2026-04-09T18:47:08Z",
+    "last_seen": "2026-04-09T18:47:08Z",
+    "current_status": "open",
+    "current_band": "Critical",
+    "events": [
+      {
+        "event_id": "0badfec2",
+        "timestamp": "2026-04-09T18:47:08Z",
+        "event_type": "raised",
+        "risk_band": "Critical",
+        "composite_score": 0.8875,
+        "author": "BIMGUARD AI",
+        "comment": ""
+      }
+    ]
+  },
+  "F2E97F57-D65E-467E-98B": {
+    "global_id": "F2E97F57-D65E-467E-98B",
+    "element_type": "IfcPipeFitting",
+    "system_type": "Process",
+    "material": "SS_316_passive",
+    "first_seen": "2026-04-09T18:47:08Z",
+    "last_seen": "2026-04-09T18:47:08Z",
+    "current_status": "open",
+    "current_band": "Critical",
+    "events": [
+      {
+        "event_id": "5d2581c7",
+        "timestamp": "2026-04-09T18:47:08Z",
+        "event_type": "raised",
+        "risk_band": "Critical",
+        "composite_score": 0.8375,
+        "author": "BIMGUARD AI",
+        "comment": ""
+      }
+    ]
+  },
+  "335CA3DF-171F-4E3F-BA4": {
+    "global_id": "335CA3DF-171F-4E3F-BA4",
+    "element_type": "IfcFastener",
+    "system_type": "Weathering",
+    "material": "Aluminum_alloy_6063",
+    "first_seen": "2026-04-09T18:47:08Z",
+    "last_seen": "2026-04-09T18:47:08Z",
+    "current_status": "open",
+    "current_band": "Medium",
+    "events": [
+      {
+        "event_id": "72f67851",
+        "timestamp": "2026-04-09T18:47:08Z",
+        "event_type": "raised",
+        "risk_band": "Medium",
+        "composite_score": 0.58,
+        "author": "BIMGUARD AI",
+        "comment": ""
+      }
+    ]
+  },
+  "713F9559-E217-4C71-9E0": {
+    "global_id": "713F9559-E217-4C71-9E0",
+    "element_type": "IfcValve",
+    "system_type": "CWS",
+    "material": "Bronze",
+    "first_seen": "2026-04-09T18:47:08Z",
+    "last_seen": "2026-04-09T18:47:08Z",
+    "current_status": "open",
+    "current_band": "Medium",
+    "events": [
+      {
+        "event_id": "33cfaa72",
+        "timestamp": "2026-04-09T18:47:08Z",
+        "event_type": "raised",
+        "risk_band": "Medium",
+        "composite_score": 0.4075,
+        "author": "BIMGUARD AI",
+        "comment": ""
+      }
+    ]
+  },
+  "86CB434D-5CDB-45DF-8A9": {
+    "global_id": "86CB434D-5CDB-45DF-8A9",
+    "element_type": "IfcPipeSegment",
+    "system_type": "Cooling",
+    "material": "SS_316_passive",
+    "first_seen": "2026-04-09T18:47:08Z",
+    "last_seen": "2026-04-09T18:47:08Z",
+    "current_status": "open",
+    "current_band": "Medium",
+    "events": [
+      {
+        "event_id": "31027400",
+        "timestamp": "2026-04-09T18:47:08Z",
+        "event_type": "raised",
+        "risk_band": "Medium",
+        "composite_score": 0.4825,
+        "author": "BIMGUARD AI",
+        "comment": ""
+      }
+    ]
+  }
+}

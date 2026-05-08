@@ -1,0 +1,16 @@
+docling --to html --to md --pipeline vlm --vlm-model granite_docling --device mps --num-threads 12 --save-profiling -vv OBC_2023.Volume_1.pdf
+docling --to html --to md --pipeline vlm --image-export-mode referenced --vlm-model granite_docling --device mps --num-threads 12 --save-profiling -vv OBC_2023.Volume_2.pdf
+
+docling --to md --pipeline vlm --image-export-mode placeholder --vlm-model granite_docling --no-ocr --table-mode fast --output Z:\Books\md --num-threads 12 -vv "Z:\Books\Contract Law_ A Comparative Introduction-Edward Elgar (2021).pdf"
+
+docling --to md --image-export-mode placeholder --no-ocr --table-mode fast --output Z:\Books\md --num-threads 12 -vv "Z:\Books\Contract Law_ A Comparative Introduction-Edward Elgar (2021).pdf"
+docling --to md --image-export-mode placeholder --no-ocr --table-mode fast --output Z:\Books\md --num-threads 16 -vv "Z:\Books\contracts\Casebook_Contract_Law_2016.pdf"
+docling --to md --image-export-mode placeholder --no-ocr --table-mode fast --output Z:\Books\md --num-threads 32 -v "C:\Users\osama\Desktop\FIDIC-2017-White-Book_watermarked_2020_08.pdf"
+docling --to md --image-export-mode placeholder --no-ocr --table-mode fast --output Z:\Books\md --num-threads 32 -v "C:\Users\osama\Desktop\LEG-PRO-03-DSA-01-Rev_05.docx"
+
+
+
+docling --to md --image-export-mode placeholder --no-ocr --table-mode fast --num-threads 32 -v "Z:\Books\contracts\Contract Law-2018.pdf"
+
+
+--image-export-mode                                                  [placeholder|embedded|referenced]

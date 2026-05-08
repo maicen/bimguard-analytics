@@ -1,0 +1,142 @@
+{
+  "ruleset_id": "BIMGUARD-GC-001",
+  "ruleset_version": "1.0.0",
+  "mechanism": "Galvanic Corrosion",
+  "description": "BIMGUARD AI compliance ruleset for galvanic corrosion risk assessment in MEP building services. Checks electrochemical potential difference between dissimilar metal pairs, area ratio risk, PREN adequacy for stainless steel grades, and environment class severity.",
+  "standards_referenced": [
+    "NASA-STD-6012 — Corrosion Control and Treatment for Aerospace Vehicles (voltage thresholds by environment class)",
+    "WorldStainless / Euro Inox (2025) — Galvanic series and corrosion rate data",
+    "AUCSC Basic Corrosion Course (2024) — Galvanic series, electrolyte conductivity",
+    "IMOA Design Manual 4th Ed. — PREN formula and grade selection",
+    "Prosoco Technical Note 104 — Area ratio analysis for mechanical anchors",
+    "American Galvanizers Association (2023) — Coating life data for galvanised steel",
+    "ISO 19650 — BIM information management and IFC property set framework",
+    "buildingSMART BCF 2.1 — Issue tracking specification"
+  ],
+  "scoring_model": {
+    "formula": "Score_GC = (0.50 x voltage_risk) + (0.30 x area_ratio_risk) + (0.20 x environment_multiplier)",
+    "weights": { "voltage_risk": 0.50, "area_ratio_risk": 0.30, "environment_multiplier": 0.20 },
+    "voltage_risk_calculation": "Normalised score = min(1.0, voltage_gap / (2 x environment_threshold)). Score = 0.00 at zero gap, 0.50 at threshold, 1.00 at twice the threshold.",
+    "pren_escalation": "PREN adequacy failure escalates minimum composite score to 0.35 (Medium band floor)."
+  },
+  "risk_bands": {
+    "Low":      { "range": "< 0.35",      "bcf_action": "Asset register only — no BCF issue" },
+    "Medium":   { "range": "0.35 - 0.65", "bcf_action": "BCF Normal priority" },
+    "High":     { "range": "0.65 - 0.85", "bcf_action": "BCF Major priority" },
+    "Critical": { "range": "> 0.85",      "bcf_action": "BCF Critical priority — immediate remediation" }
+  },
+  "galvanic_series": {
+    "reference_electrolyte": "Seawater at ambient temperature",
+    "reference_electrode": "Ag/AgCl",
+    "source": "WorldStainless / Euro Inox (2025) and AUCSC Basic Corrosion Course (2024)",
+    "note": "Lower potential = more noble (cathodic). Higher potential = more active (anodic) — corrodes preferentially.",
+    "materials": {
+      "platinum":      { "potential_v": 0.00, "label": "Platinum",            "noble": true  },
+      "gold":          { "potential_v": 0.02, "label": "Gold",                "noble": true  },
+      "graphite":      { "potential_v": 0.03, "label": "Graphite",            "noble": true  },
+      "titanium":      { "potential_v": 0.05, "label": "Titanium",            "noble": true  },
+      "ss316_passive": { "potential_v": 0.08, "label": "SS 316 (passive)",    "noble": true,  "pren_typical": 25 },
+      "ss304_passive": { "potential_v": 0.12, "label": "SS 304 (passive)",    "noble": true,  "pren_typical": 19 },
+      "hastelloy_c":   { "potential_v": 0.14, "label": "Hastelloy C",         "noble": true  },
+      "silver_solder": { "potential_v": 0.18, "label": "Silver solder",       "noble": true  },
+      "ss316_active":  { "potential_v": 0.22, "label": "SS 316 (active)",     "noble": false, "pren_typical": 25 },
+      "copper":        { "potential_v": 0.28, "label": "Copper",              "noble": true  },
+      "brass":         { "potential_v": 0.32, "label": "Brass (70/30)",       "noble": false },
+      "bronze":        { "potential_v": 0.34, "label": "Bronze",              "noble": false },
+      "ss304_active":  { "potential_v": 0.38, "label": "SS 304 (active)",     "noble": false, "pren_typical": 19 },
+      "cast_iron":     { "potential_v": 0.52, "label": "Cast iron",           "noble": false },
+      "carbon_steel":  { "potential_v": 0.55, "label": "Carbon / mild steel", "noble": false },
+      "aluminium":     { "potential_v": 0.70, "label": "Aluminium alloys",    "noble": false },
+      "cadmium":       { "potential_v": 0.75, "label": "Cadmium",             "noble": false },
+      "zinc":          { "potential_v": 0.80, "label": "Zinc",                "noble": false },
+      "galv_steel":    { "potential_v": 0.82, "label": "Galvanised steel",    "noble": false },
+      "magnesium":     { "potential_v": 0.95, "label": "Magnesium alloys",    "noble": false }
+    }
+  },
+  "environment_classes": {
+    "source": "NASA-STD-6012 Table 1",
+    "E1_CONTROLLED": { "label": "Fully controlled / dry indoor",   "voltage_threshold_v": 0.50, "multiplier": 0.20 },
+    "E2_NORMAL":     { "label": "Normal heated indoor",            "voltage_threshold_v": 0.25, "multiplier": 0.40 },
+    "E3_HUMID":      { "label": "Humid plant room",                "voltage_threshold_v": 0.15, "multiplier": 0.65 },
+    "E4_SHELTERED":  { "label": "External sheltered",              "voltage_threshold_v": 0.15, "multiplier": 0.70 },
+    "E5_EXPOSED":    { "label": "External exposed",                "voltage_threshold_v": 0.10, "multiplier": 0.85 },
+    "E6_POOL":       { "label": "Pool or spa enclosure",           "voltage_threshold_v": 0.10, "multiplier": 0.90 },
+    "E7_COASTAL":    { "label": "Coastal or marine",               "voltage_threshold_v": 0.05, "multiplier": 1.00 }
+  },
+  "area_ratio_bands": {
+    "source": "Prosoco Technical Note 104 / AUCSC Basic Corrosion Course (2024)",
+    "bands": [
+      { "label": "Favourable",   "min_ratio": 5.0, "risk_score": 0.20 },
+      { "label": "Acceptable",   "min_ratio": 2.0, "risk_score": 0.40 },
+      { "label": "Moderate",     "min_ratio": 0.5, "risk_score": 0.60 },
+      { "label": "Unfavourable", "min_ratio": 0.1, "risk_score": 0.80 },
+      { "label": "Critical",     "min_ratio": 0.0, "risk_score": 1.00 }
+    ]
+  },
+  "pren_thresholds": {
+    "formula": "PREN = %Cr + 3.3 x %Mo + 16 x %N",
+    "source": "IMOA Design Manual 4th Ed.",
+    "by_environment": {
+      "E1_CONTROLLED": { "min_pren": 18, "note": "SS304 adequate" },
+      "E2_NORMAL":     { "min_pren": 18, "note": "SS304 adequate" },
+      "E3_HUMID":      { "min_pren": 25, "note": "SS316 required" },
+      "E4_SHELTERED":  { "min_pren": 25, "note": "SS316 required" },
+      "E5_EXPOSED":    { "min_pren": 32, "note": "Duplex 2205 or better required" },
+      "E6_POOL":       { "min_pren": 32, "note": "Duplex 2205 or better required" },
+      "E7_COASTAL":    { "min_pren": 40, "note": "Super Duplex 2507 or Titanium required" }
+    },
+    "grade_pren_values": {
+      "SS 304": 19, "SS 316": 25, "Duplex 2205": 35, "Super Duplex 2507": 42, "Titanium Grade 2": 45
+    }
+  },
+  "common_mep_pairings": [
+    { "id": "P-001", "anode": "galv_steel",    "cathode": "copper",        "gap_v": 0.54, "env": "E3_HUMID",   "band": "Critical", "application": "Galvanised steel support bracket / copper pipe" },
+    { "id": "P-002", "anode": "carbon_steel",  "cathode": "ss316_passive", "gap_v": 0.47, "env": "E3_HUMID",   "band": "Critical", "application": "Carbon steel structure / SS316 process pipe" },
+    { "id": "P-003", "anode": "aluminium",     "cathode": "copper",        "gap_v": 0.42, "env": "E2_NORMAL",  "band": "High",     "application": "Aluminium cable tray / copper pipework" },
+    { "id": "P-004", "anode": "carbon_steel",  "cathode": "copper",        "gap_v": 0.27, "env": "E2_NORMAL",  "band": "Medium",   "application": "Carbon steel pipe / copper fittings" },
+    { "id": "P-005", "anode": "ss304_passive", "cathode": "ss316_passive", "gap_v": 0.04, "env": "E2_NORMAL",  "band": "Low",      "application": "SS304 fittings / SS316 pipe" },
+    { "id": "P-006", "anode": "galv_steel",    "cathode": "ss316_passive", "gap_v": 0.74, "env": "E3_HUMID",   "band": "Critical", "application": "Galvanised unistrut / SS316 process pipe" },
+    { "id": "P-007", "anode": "carbon_steel",  "cathode": "brass",         "gap_v": 0.23, "env": "E2_NORMAL",  "band": "Medium",   "application": "Carbon steel pipe / brass valve" },
+    { "id": "P-008", "anode": "cast_iron",     "cathode": "copper",        "gap_v": 0.24, "env": "E2_NORMAL",  "band": "Medium",   "application": "Cast iron pump body / copper distribution" },
+    { "id": "P-009", "anode": "aluminium",     "cathode": "ss316_passive", "gap_v": 0.62, "env": "E3_HUMID",   "band": "Critical", "application": "Aluminium ductwork / SS316 pipework" },
+    { "id": "P-010", "anode": "titanium",      "cathode": "ss316_passive", "gap_v": 0.03, "env": "E6_POOL",    "band": "Low",      "application": "Titanium pipe / SS316 fittings in pool" }
+  ],
+  "mitigation_catalogue": {
+    "MIT-GC-001": "Install dielectric isolation gaskets at all contact points between dissimilar metals",
+    "MIT-GC-002": "Specify non-conductive spacers or sleeves between dissimilar metal surfaces",
+    "MIT-GC-003": "Replace less noble metal with grade compatible with adjacent material",
+    "MIT-GC-004": "Apply protective organic coating to both metallic surfaces at contact zone",
+    "MIT-GC-005": "Install cathodic protection system — sacrificial anode or impressed current",
+    "MIT-GC-006": "Increase separation distance to prevent moisture bridge formation",
+    "MIT-GC-007": "Upgrade stainless steel grade to meet PREN requirement for environment class (IMOA Design Manual 4th Ed.)",
+    "MIT-GC-008": "Replace galvanised steel fittings with SS304 or SS316 in this zone",
+    "MIT-GC-009": "Use corrosion-inhibiting sealant at all dissimilar metal joints",
+    "MIT-GC-010": "Implement corrosion monitoring programme at identified high-risk junctions"
+  },
+  "pset_corrosion_risk_schema": {
+    "pset_name": "Pset_CorrosionRisk",
+    "ifc_entities": ["IfcPipeSegment", "IfcPipeFitting", "IfcFlowSegment"],
+    "properties": [
+      { "name": "GC001_CompositeScore",        "type": "IfcReal",     "description": "GC-001 composite risk score 0.0-1.0" },
+      { "name": "GC001_RiskBand",              "type": "IfcLabel",    "description": "Low / Medium / High / Critical" },
+      { "name": "GC001_VoltageGap_V",          "type": "IfcReal",     "description": "Electrochemical potential difference (V)" },
+      { "name": "GC001_VoltageRisk",           "type": "IfcReal",     "description": "Voltage risk sub-score 0.0-1.0" },
+      { "name": "GC001_AreaRatioBand",         "type": "IfcLabel",    "description": "Area ratio classification" },
+      { "name": "GC001_AreaRatioRisk",         "type": "IfcReal",     "description": "Area ratio risk sub-score 0.0-1.0" },
+      { "name": "GC001_EnvironmentClass",      "type": "IfcLabel",    "description": "E1_CONTROLLED through E7_COASTAL" },
+      { "name": "GC001_EnvironmentMultiplier", "type": "IfcReal",     "description": "Environment severity multiplier 0.20-1.00" },
+      { "name": "GC001_PRENAdequate",          "type": "IfcBoolean",  "description": "PREN adequacy check result" },
+      { "name": "GC001_PRENNote",              "type": "IfcText",     "description": "PREN check explanation" },
+      { "name": "GC001_RecommendedMitigation", "type": "IfcText",     "description": "Pipe-separated mitigation codes" },
+      { "name": "GC001_RulesetVersion",        "type": "IfcLabel",    "description": "BIMGUARD-GC-001 ruleset version" },
+      { "name": "GC001_AssessmentDate",        "type": "IfcDateTime", "description": "ISO 8601 UTC timestamp of assessment" }
+    ]
+  },
+  "ifc_data_sources": {
+    "material":        ["Pset_MaterialCommon.Name", "IfcMaterial.Name"],
+    "nominal_diameter":["Pset_PipeSegmentOccurrence.NominalDiameter"],
+    "surface_area":    ["Qto_PipeSegmentBaseQuantities.OuterSurfaceArea", "Calculated via ifcopenshell.geom"],
+    "zone_category":   ["IfcZone.LongName", "IfcZone.Name", "Pset_ZoneCommon.Category"],
+    "system_type":     ["IfcDistributionSystem.PredefinedType", "IfcDistributionSystem.LongName"]
+  }
+}

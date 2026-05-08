@@ -1,0 +1,41 @@
+{
+  "id": "bimguard-report-001",
+  "resourcePackages": [],
+  "config": "{\"version\":\"5.51\",\"themeCollection\":{\"baseTheme\":{\"name\":\"BIMGuard\",\"version\":\"5.51\",\"type\":2}}}",
+  "layoutOptimization": 0,
+  "publicCustomVisuals": [],
+  "sections": [
+    {
+      "id": "executive-overview",
+      "displayName": "Executive Overview",
+      "displayOption": 1,
+      "height": 720,
+      "width": 1280,
+      "visualContainers": []
+    },
+    {
+      "id": "rule-compliance",
+      "displayName": "Rule / Compliance",
+      "displayOption": 1,
+      "height": 720,
+      "width": 1280,
+      "visualContainers": []
+    },
+    {
+      "id": "spatial-location",
+      "displayName": "Spatial / Location",
+      "displayOption": 1,
+      "height": 720,
+      "width": 1280,
+      "visualContainers": []
+    },
+    {
+      "id": "workflow-history",
+      "displayName": "Workflow / History",
+      "displayOption": 1,
+      "height": 720,
+      "width": 1280,
+      "visualContainers": []
+    }
+  ]
+}

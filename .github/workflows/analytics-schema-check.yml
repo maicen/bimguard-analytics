@@ -1,0 +1,60 @@
+name: Analytics Export Schema Check
+
+on:
+  push:
+    branches: [dev, main]
+    paths:
+      - 'bimguard_app/modules/analytics_export.py'
+      - 'data/schema/data-contract.md'
+
+jobs:
+  schema-check:
+    name: Run analytics_export smoke test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run analytics_export CLI smoke test
+        run: |
+          cd bimguard_app
+          python modules/analytics_export.py
+
+      - name: Validate output file count
+        run: |
+          python3 -c "
+          import os, sys
+          base = 'bimguard_app/analytics_export_test'
+          expected_files = [
+              'facts/issues.csv',
+              'facts/issue_status_history.csv',
+              'dimensions/dim_projects.csv',
+              'dimensions/dim_models.csv',
+              'dimensions/dim_rules.csv',
+              'dimensions/dim_locations.csv',
+              'dimensions/dim_assignments.csv',
+              'dimensions/dim_issue_types.csv',
+              'dimensions/dim_severity.csv',
+              'dimensions/dim_status.csv',
+              'dimensions/dim_mechanism.csv',
+              'meta/export_manifest.json',
+          ]
+          missing = []
+          for f in expected_files:
+              full = os.path.join(base, f)
+              if not os.path.exists(full):
+                  missing.append(f)
+              else:
+                  size = os.path.getsize(full)
+                  print(f'✓ {f} ({size:,} bytes)')
+          if missing:
+              print(f'✗ Missing: {missing}')
+              sys.exit(1)
+          print(f'\n✓ All {len(expected_files)} expected files present')
+          "

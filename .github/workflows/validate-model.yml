@@ -1,0 +1,93 @@
+name: Validate Power BI Model
+
+on:
+  pull_request:
+    paths:
+      - 'powerbi/BIMGuardAnalytics.SemanticModel/model.bim'
+      - 'data/schema/**'
+
+jobs:
+  validate-model:
+    name: Validate model.bim and data contract
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check model.bim is valid JSON
+        run: |
+          echo "Validating model.bim..."
+          python3 -c "
+          import json, sys
+          try:
+              with open('powerbi/BIMGuardAnalytics.SemanticModel/model.bim', 'r') as f:
+                  data = json.load(f)
+              print('✓ model.bim is valid JSON')
+              # Check required top-level keys
+              required = ['name', 'compatibilityLevel', 'model']
+              missing = [k for k in required if k not in data]
+              if missing:
+                  print(f'✗ Missing required keys: {missing}')
+                  sys.exit(1)
+              print(f'✓ Required keys present: {required}')
+              # Count tables and measures
+              tables = data.get('model', {}).get('tables', [])
+              measure_count = sum(len(t.get('measures', [])) for t in tables)
+              print(f'✓ Tables: {len(tables)} | Measures: {measure_count}')
+          except FileNotFoundError:
+              print('⚠ model.bim not yet committed — skipping validation')
+          except json.JSONDecodeError as e:
+              print(f'✗ model.bim is not valid JSON: {e}')
+              sys.exit(1)
+          "
+
+      - name: Check data contract CSVs have required columns
+        run: |
+          python3 -c "
+          import csv, os, sys
+
+          REQUIRED_COLUMNS = {
+              'issues': [
+                  'IssueID', 'ProjectID', 'ModelID', 'RuleID', 'LocationID',
+                  'SeverityID', 'StatusID', 'GalvanicScore', 'CreviceScore',
+                  'CombinedScore', 'CostImpactGBP', 'DelayDays', 'CreatedDate'
+              ],
+              'issue_status_history': [
+                  'HistoryID', 'IssueID', 'FromStatusID', 'ToStatusID',
+                  'ChangedDate', 'ChangedBy', 'EventType'
+              ],
+          }
+
+          samples_dir = 'data/samples'
+          if not os.path.exists(samples_dir):
+              print('⚠ data/samples not found — skipping column validation')
+              exit(0)
+
+          errors = []
+          for table_name, required_cols in REQUIRED_COLUMNS.items():
+              filepath = os.path.join(samples_dir, f'{table_name}.csv')
+              if not os.path.exists(filepath):
+                  print(f'⚠ {filepath} not found — skipping')
+                  continue
+              with open(filepath) as f:
+                  reader = csv.DictReader(f)
+                  headers = reader.fieldnames or []
+              missing = [c for c in required_cols if c not in headers]
+              if missing:
+                  errors.append(f'{table_name}.csv missing: {missing}')
+              else:
+                  print(f'✓ {table_name}.csv — all required columns present')
+
+          if errors:
+              for e in errors:
+                  print(f'✗ {e}')
+              sys.exit(1)
+          "
+
+      - name: Summary
+        if: always()
+        run: |
+          echo ""
+          echo "Power BI model validation complete."
+          echo "Check the steps above for any warnings or errors."

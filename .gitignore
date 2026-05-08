@@ -1,0 +1,110 @@
+# =============================================================================
+# BIMGUARD AI — .gitignore
+# =============================================================================
+
+# ---------------------------------------------------------------------------
+# Python
+# ---------------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.python-version
+pip-log.txt
+pip-delete-this-directory.txt
+
+# ---------------------------------------------------------------------------
+# Streamlit
+# ---------------------------------------------------------------------------
+.streamlit/secrets.toml
+
+# ---------------------------------------------------------------------------
+# Power BI
+# ---------------------------------------------------------------------------
+# Never commit the .pbix monolith — use .pbip only
+*.pbix
+# Auto-generated cache files inside PBIP folders
+*.pbip.cache
+**/.pbi/localSettings.json
+**/StaticResources/
+
+# ---------------------------------------------------------------------------
+# Data files — large IFC / point cloud files stay local
+# ---------------------------------------------------------------------------
+*.ifc
+*.las
+*.laz
+*.e57
+*.rvt
+*.rfa
+*.nwc
+*.nwd
+
+# Analytics export output — generated at runtime, not versioned
+analytics_export/
+analytics_export_test/
+
+# Sample data is committed; real project data is not
+data/projects/
+data/live/
+!data/samples/
+!data/schema/
+
+# ---------------------------------------------------------------------------
+# OS
+# ---------------------------------------------------------------------------
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# ---------------------------------------------------------------------------
+# IDEs
+# ---------------------------------------------------------------------------
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+
+# ---------------------------------------------------------------------------
+# Secrets & credentials — NEVER commit these
+# ---------------------------------------------------------------------------
+*.pem
+*.key
+*.p12
+*.pfx
+.env.*
+secrets.json
+credentials.json
+token.json

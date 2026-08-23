@@ -1,0 +1,93 @@
+table dim_severity
+	lineageTag: 8c6e94f2-e410-4fd1-960b-968adcb1b6de
+
+	column SeverityID
+		dataType: string
+		lineageTag: 920d1e54-78fd-42b7-b0a5-9c21407bd187
+		summarizeBy: none
+		sourceColumn: SeverityID
+
+		annotation SummarizationSetBy = Automatic
+
+	column SeverityName
+		dataType: string
+		lineageTag: 21fd70b1-09d0-48c3-af83-2a47acc42002
+		summarizeBy: none
+		sourceColumn: SeverityName
+
+		annotation SummarizationSetBy = Automatic
+
+	column SeverityCode
+		dataType: string
+		lineageTag: 1602b615-024e-4d68-90fc-ed92b2a94ab6
+		summarizeBy: none
+		sourceColumn: SeverityCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column RiskBand
+		dataType: string
+		lineageTag: a76d5273-e251-487e-b152-bc74f4cff9bc
+		summarizeBy: none
+		sourceColumn: RiskBand
+
+		annotation SummarizationSetBy = Automatic
+
+	column ScoreMin
+		dataType: double
+		lineageTag: 0a275065-78ab-4c50-b9c6-605aed86b084
+		summarizeBy: none
+		sourceColumn: ScoreMin
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ScoreMax
+		dataType: double
+		lineageTag: 2e6666de-80a7-4ac8-afdb-13463d16411a
+		summarizeBy: none
+		sourceColumn: ScoreMax
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Colour
+		dataType: string
+		lineageTag: f0fc63bd-df94-4943-aa40-65f05919135a
+		summarizeBy: none
+		sourceColumn: Colour
+
+		annotation SummarizationSetBy = Automatic
+
+	column BCFPriority
+		dataType: int64
+		formatString: 0
+		lineageTag: ef2d8ee4-80df-49cc-ab0f-99bf1d146b09
+		summarizeBy: none
+		sourceColumn: BCFPriority
+
+		annotation SummarizationSetBy = Automatic
+
+	column SortOrder
+		dataType: int64
+		formatString: 0
+		lineageTag: 6c5e3e0b-502b-4467-947d-2e40f5ddc4b4
+		summarizeBy: none
+		sourceColumn: SortOrder
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_severity = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("D:\Zigurat Masters\bimguard-analytics-repo\bimguard-repo\bimguard_app\modules\analytics_export_test\dimensions\dim_severity.csv"),[Delimiter=",", Columns=9, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"SeverityID", type text}, {"SeverityName", type text}, {"SeverityCode", type text}, {"RiskBand", type text}, {"ScoreMin", type number}, {"ScoreMax", type number}, {"Colour", type text}, {"BCFPriority", Int64.Type}, {"SortOrder", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

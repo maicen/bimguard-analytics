@@ -1,0 +1,72 @@
+table dim_assignments
+	lineageTag: ac79681d-0ecf-4d08-84cb-aa6f498ec72e
+
+	column AssigneeID
+		dataType: string
+		lineageTag: 6eb6aaf5-a59e-4055-8de4-f43076a61b85
+		summarizeBy: none
+		sourceColumn: AssigneeID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Name
+		dataType: string
+		lineageTag: 5f5a1913-e372-414f-967c-113c9a3fd518
+		summarizeBy: none
+		sourceColumn: Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Discipline
+		dataType: string
+		lineageTag: c72f8da3-39d4-4d53-a3da-4052190f3a65
+		summarizeBy: none
+		sourceColumn: Discipline
+
+		annotation SummarizationSetBy = Automatic
+
+	column Role
+		dataType: string
+		lineageTag: aab20b01-ca19-40f7-8b59-d91e6b58203a
+		summarizeBy: none
+		sourceColumn: Role
+
+		annotation SummarizationSetBy = Automatic
+
+	column Email
+		dataType: string
+		lineageTag: 8415c814-1287-4a05-84f4-f416981a9412
+		summarizeBy: none
+		sourceColumn: Email
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsActive
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 61b0002c-63eb-428f-9b4f-a14d00fe5f33
+		summarizeBy: none
+		sourceColumn: IsActive
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProjectID
+		dataType: string
+		lineageTag: caa41b06-1758-48e6-bb5f-ca7b5ae65bec
+		summarizeBy: none
+		sourceColumn: ProjectID
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_assignments = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("D:\Zigurat Masters\bimguard-analytics-repo\bimguard-repo\bimguard_app\modules\analytics_export_test\dimensions\dim_assignments.csv"),[Delimiter=",", Columns=7, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"AssigneeID", type text}, {"Name", type text}, {"Discipline", type text}, {"Role", type text}, {"Email", type text}, {"IsActive", type logical}, {"ProjectID", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

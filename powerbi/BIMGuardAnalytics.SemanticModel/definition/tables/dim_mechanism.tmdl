@@ -1,0 +1,56 @@
+table dim_mechanism
+	lineageTag: 7e9d6305-c7b9-4d84-8063-b1ba9934b91c
+
+	column MechanismID
+		dataType: string
+		lineageTag: 1265231b-edf2-491c-920f-aa1e99e22077
+		summarizeBy: none
+		sourceColumn: MechanismID
+
+		annotation SummarizationSetBy = Automatic
+
+	column MechanismName
+		dataType: string
+		lineageTag: f27a1360-a070-4211-a48d-f7bc40678f28
+		summarizeBy: none
+		sourceColumn: MechanismName
+
+		annotation SummarizationSetBy = Automatic
+
+	column MechanismFullName
+		dataType: string
+		lineageTag: 25edec94-db79-4cd9-9601-316b2205f42f
+		summarizeBy: none
+		sourceColumn: MechanismFullName
+
+		annotation SummarizationSetBy = Automatic
+
+	column EngineCode
+		dataType: string
+		lineageTag: 6553d915-ea00-4c65-914d-7d61d978e720
+		summarizeBy: none
+		sourceColumn: EngineCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsImplemented
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 0a19644e-1987-4d15-b5fe-59e3f943ddae
+		summarizeBy: none
+		sourceColumn: IsImplemented
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_mechanism = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("D:\Zigurat Masters\bimguard-analytics-repo\bimguard-repo\bimguard_app\modules\analytics_export_test\dimensions\dim_mechanism.csv"),[Delimiter=",", Columns=5, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"MechanismID", type text}, {"MechanismName", type text}, {"MechanismFullName", type text}, {"EngineCode", type text}, {"IsImplemented", type logical}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

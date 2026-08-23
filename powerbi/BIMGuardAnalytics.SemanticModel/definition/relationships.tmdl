@@ -1,0 +1,69 @@
+relationship 34d4bd61-07e7-4ace-8147-da9a00c2ccc0
+	joinOnDateBehavior: datePartOnly
+	fromColumn: issues.CreatedDate
+	toColumn: LocalDateTable_6a00329b-a149-49b0-b9fb-bb86000f3c59.Date
+
+relationship b38ef6a8-83d1-4888-b6ae-aed8466adeca
+	joinOnDateBehavior: datePartOnly
+	fromColumn: issue_status_history.ChangedDate
+	toColumn: LocalDateTable_86b9ebfa-dd62-45d9-809d-de7023b6afc0.Date
+
+relationship AutoDetected_a81acfe0-e41b-4b6c-9c7c-1d9a892a738f
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: issue_status_history.IssueID
+	toColumn: issues.IssueID
+
+relationship AutoDetected_f51aa0dd-ebb5-45c3-9c9b-ba34d2dd7d5e
+	fromColumn: issues.SeverityID
+	toColumn: dim_severity.SeverityID
+
+relationship AutoDetected_8d374564-8696-44ab-b8cb-34188781249a
+	fromColumn: issues.LocationID
+	toColumn: dim_locations.LocationID
+
+relationship AutoDetected_d21baf57-c479-4186-aaf8-52ed3bcd53fc
+	fromColumn: issues.AssigneeID
+	toColumn: dim_assignments.AssigneeID
+
+relationship aed774e2-ecab-4a74-9c01-3da98abebbbe
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_models.ExportDate
+	toColumn: LocalDateTable_4a2c611d-5d19-432e-b37c-78b283dc0236.Date
+
+relationship 82a2cc91-b731-429c-9f5e-d8ba67fe92bf
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_projects.BaselineDate
+	toColumn: LocalDateTable_373534a4-ffdf-4f75-b7e5-01b7fcecd997.Date
+
+relationship 8d48eec4-19d3-46be-a5c7-673fc7b0249f
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_projects.CreatedDate
+	toColumn: LocalDateTable_f8d7f8d2-4dca-4395-aac3-a07587447ae3.Date
+
+relationship AutoDetected_e7c5ae64-d46f-42b1-b466-51d755997457
+	fromColumn: issues.RuleID
+	toColumn: dim_rules.RuleID
+
+relationship AutoDetected_888ff2b7-490c-46be-845f-7ee04843377b
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: dim_rules.MechanismID
+	toColumn: dim_mechanism.MechanismID
+
+relationship AutoDetected_eeb1cabb-119f-4110-bcad-77c239ddd077
+	fromColumn: issues.StatusID
+	toColumn: dim_status.StatusID
+
+relationship 51136ed2-a01e-c065-6b5b-6f57aeba3c31
+	fromColumn: issues.ProjectID
+	toColumn: dim_projects.ProjectID
+
+relationship b6007117-c9da-404b-8d0e-8378f55dd5b0
+	fromColumn: issues.ModelID
+	toColumn: dim_models.ModelID
+
+relationship AutoDetected_c17945a4-2230-4739-ab76-dbc6e4350e4a
+	fromColumn: issues.IssueTypeID
+	toColumn: dim_issue_types.IssueTypeID
+

@@ -1,0 +1,50 @@
+table dim_issue_types
+	lineageTag: c65d3779-ddef-4f3e-9b11-e64c02cef467
+
+	column IssueTypeID
+		dataType: string
+		lineageTag: 71066734-63e6-45c6-8b56-1c1cb6e42f93
+		summarizeBy: none
+		sourceColumn: IssueTypeID
+
+		annotation SummarizationSetBy = Automatic
+
+	column IssueTypeName
+		dataType: string
+		lineageTag: d89fba1d-1741-462a-9aa7-0e105ff506b1
+		summarizeBy: none
+		sourceColumn: IssueTypeName
+
+		annotation SummarizationSetBy = Automatic
+
+	column IssueTypeCode
+		dataType: string
+		lineageTag: 0b11d12c-5be5-4d55-9396-9c3ca3069c2f
+		summarizeBy: none
+		sourceColumn: IssueTypeCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column Category
+		dataType: string
+		lineageTag: 7ddc443b-1fb7-4a09-88df-d776571219a3
+		summarizeBy: none
+		sourceColumn: Category
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_issue_types = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("D:\Zigurat Masters\bimguard-analytics-repo\bimguard-repo\bimguard_app\modules\analytics_export_test\dimensions\dim_issue_types.csv"),[Delimiter=",", Columns=4, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Column1", type text}, {"Column2", type text}, {"Column3", type text}, {"Column4", type text}}),
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Changed Type", [PromoteAllScalars=true]),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Promoted Headers",{{"IssueTypeID", type text}, {"IssueTypeName", type text}, {"IssueTypeCode", type text}, {"Category", type text}})
+				in
+				    #"Changed Type1"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

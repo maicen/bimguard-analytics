@@ -1,0 +1,96 @@
+table dim_models
+	lineageTag: f1a32b2c-2f11-433d-b32b-522e1df407cc
+
+	column ModelID
+		dataType: string
+		lineageTag: 9a5a4b17-2265-4a93-8bfb-dda5665b3231
+		summarizeBy: none
+		sourceColumn: ModelID
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProjectID
+		dataType: string
+		lineageTag: f1aa8876-05c3-4d3d-b56d-f6cd16baca14
+		summarizeBy: none
+		sourceColumn: ProjectID
+
+		annotation SummarizationSetBy = Automatic
+
+	column ModelName
+		dataType: string
+		lineageTag: 5c1ce64f-2b0e-44e3-9336-23b6a147d8fc
+		summarizeBy: none
+		sourceColumn: ModelName
+
+		annotation SummarizationSetBy = Automatic
+
+	column IFCPath
+		dataType: string
+		lineageTag: 5176e80c-b0ac-4850-97c2-7116798b3abe
+		summarizeBy: none
+		sourceColumn: IFCPath
+
+		annotation SummarizationSetBy = Automatic
+
+	column IFCSchema
+		dataType: string
+		lineageTag: c35477d1-c30e-4259-b120-76dc69c5e53a
+		summarizeBy: none
+		sourceColumn: IFCSchema
+
+		annotation SummarizationSetBy = Automatic
+
+	column Discipline
+		dataType: string
+		lineageTag: e66ab51f-11e4-4c75-9b1f-befad0f3404b
+		summarizeBy: none
+		sourceColumn: Discipline
+
+		annotation SummarizationSetBy = Automatic
+
+	column AuthoringTool
+		dataType: string
+		lineageTag: 54131d14-884d-4d56-9516-933ec9207757
+		summarizeBy: none
+		sourceColumn: AuthoringTool
+
+		annotation SummarizationSetBy = Automatic
+
+	column ExportDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 104ce304-3d62-46d4-a8de-3ae4f822c84e
+		summarizeBy: none
+		sourceColumn: ExportDate
+
+		variation Variation
+			isDefault
+			relationship: aed774e2-ecab-4a74-9c01-3da98abebbbe
+			defaultHierarchy: LocalDateTable_4a2c611d-5d19-432e-b37c-78b283dc0236.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column ElementCount
+		dataType: int64
+		formatString: 0
+		lineageTag: cf098dbc-05d5-4950-8767-d953a189eb37
+		summarizeBy: sum
+		sourceColumn: ElementCount
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_models = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("D:\Zigurat Masters\bimguard-analytics-repo\bimguard-repo\bimguard_app\modules\analytics_export_test\dimensions\dim_models.csv"),[Delimiter=",", Columns=9, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"ModelID", type text}, {"ProjectID", type text}, {"ModelName", type text}, {"IFCPath", type text}, {"IFCSchema", type text}, {"Discipline", type text}, {"AuthoringTool", type text}, {"ExportDate", type date}, {"ElementCount", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

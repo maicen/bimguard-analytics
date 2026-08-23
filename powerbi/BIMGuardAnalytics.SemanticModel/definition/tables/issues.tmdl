@@ -1,0 +1,424 @@
+table issues
+	lineageTag: c3763d02-2711-4637-983d-ab5415dec234
+
+	measure 'Total Issues' = COUNTROWS(issues)
+		formatString: 0
+		lineageTag: d090dfd2-aee9-40d0-8c0e-621ec62d229e
+
+	measure 'Open Issues' = CALCULATE(COUNTROWS(issues), issues[IsOpen])
+		formatString: 0
+		lineageTag: e9d415d8-6dcf-48c0-aa11-c7785e09c1d6
+
+	measure 'Critical Issues' = CALCULATE(COUNTROWS(issues), issues[SeverityID] = "SEV-CRIT")
+		formatString: 0
+		lineageTag: 341b4286-8a53-4998-91ff-24fa9b9e2736
+
+	measure 'Medium Issues' = CALCULATE(COUNTROWS(issues), issues[SeverityID] = "SEV-MED")
+		formatString: 0
+		lineageTag: f0a7df41-34f8-4b17-9f42-7b1948928b2d
+
+	measure 'High Issues' = CALCULATE(COUNTROWS(issues), issues[SeverityID] = "SEV-HIGH")
+		formatString: 0
+		lineageTag: 66dff1d1-dce3-4aaf-9092-7348e7423133
+
+	measure 'Low Issues' = CALCULATE(COUNTROWS(issues), issues[SeverityID] = "SEV-LOW")
+		formatString: 0
+		lineageTag: 2dcd7803-cf21-41db-b0df-1e25a072e6cb
+
+	measure 'Critical or High Issues' = CALCULATE(COUNTROWS(issues), issues[IsCriticalOrHigh])
+		formatString: 0
+		lineageTag: 345724f2-de32-4e3c-b4c0-1a36f3bb4f1c
+
+	measure 'Closed Issues' = CALCULATE(COUNTROWS(issues), issues[StatusID] = "STS-CLOS")
+		formatString: 0
+		lineageTag: 0903de0d-8dce-4b7e-90dc-377361fbf95e
+
+	measure 'Approved Issues' = CALCULATE(COUNTROWS(issues), issues[StatusID] = "STS-APPR")
+		formatString: 0
+		lineageTag: 9be33eb9-9c65-4251-8240-8241bf542986
+
+	measure 'Compliance Failures' = CALCULATE(COUNTROWS(issues), issues[IsComplianceFailure])
+		formatString: 0
+		lineageTag: b82ef90f-b847-46da-9c28-639a98dc28d9
+
+	measure 'Compliance Score %' =
+			
+			VAR TotalIssues = COUNTROWS(issues)
+			VAR Failures = [Compliance Failures]
+			RETURN IF(TotalIssues = 0, BLANK(), 1 - DIVIDE(Failures, TotalIssues, 0))
+		lineageTag: 7f6004b9-c8c8-4836-a770-80325b9653cf
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Failure Rate %' = DIVIDE([Compliance Failures], [Total Issues], 0)
+		lineageTag: 138d75ae-8e8b-4bc0-80c4-e80465fdaeb5
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Cost Impact GBP' = SUM(issues[CostImpactGBP])
+		lineageTag: bfced0ae-5a87-40a3-9f18-8a470a14051e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Delay Days' = SUM(issues[DelayDays])
+		formatString: 0
+		lineageTag: 48cbbe9c-df08-444e-bf44-6238f7ea485d
+
+	measure 'Avg Risk Score' = AVERAGE(issues[CombinedScore])
+		lineageTag: 18e433ae-3965-41a2-957c-3fe9aba11693
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Unassigned Issues' = CALCULATE(COUNTROWS(issues), issues[AssigneeID] = "ASN-UNASSIGNED")
+		formatString: 0
+		lineageTag: 2c968e56-900b-43ce-8e12-6c05a648e9c7
+
+	measure 'Assigned Issues' = CALCULATE(COUNTROWS(issues), issues[AssigneeID] <> "ASN-UNASSIGNED")
+		formatString: 0
+		lineageTag: a79d5b19-d4ac-40a0-8baa-7975984a2deb
+
+	measure 'Assigned Rate %' = DIVIDE([Assigned Issues], [Total Issues], 0)
+		lineageTag: 129588bc-7210-4532-98a1-76783fa79b5c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Resolution Rate %' = DIVIDE([Closed Issues] + [Approved Issues], [Total Issues], 0)
+		lineageTag: 229fdcab-8f2a-4ca2-beb0-51a8f81e6458
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Overdue Issues' = CALCULATE(COUNTROWS(issues), issues[IsOpen], DATEDIFF(issues[CreatedDate], TODAY(), DAY) > 30)
+		formatString: 0
+		lineageTag: a4f3fbf8-f4ec-418b-a863-fbcd1fd9fe2a
+
+	measure 'Avg Issue Age Days' = AVERAGEX(FILTER(issues, issues[IsOpen] = TRUE()), DATEDIFF(issues[CreatedDate], TODAY(), DAY))
+		lineageTag: 0e228099-a390-4713-8c4f-5683a497548d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Galvanic Issues' = CALCULATE(COUNTROWS(issues), issues[DominantMechanism] = "Galvanic")
+		formatString: 0
+		lineageTag: c0e264a6-b126-4776-ac01-2ef1325fd284
+
+	measure 'Crevice Issues' = CALCULATE(COUNTROWS(issues), issues[DominantMechanism] = "Crevice")
+		formatString: 0
+		lineageTag: dbffd72f-b18f-4d28-80e9-6c7f74149187
+
+	column IssueID
+		dataType: string
+		lineageTag: 68ba20a2-8d7b-4022-b356-bad402a90f66
+		summarizeBy: none
+		sourceColumn: IssueID
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProjectID
+		dataType: string
+		lineageTag: 94fad165-4211-4e74-b12e-fe6a698e2698
+		summarizeBy: none
+		sourceColumn: ProjectID
+
+		annotation SummarizationSetBy = Automatic
+
+	column ModelID
+		dataType: string
+		lineageTag: db7c7b1f-5610-4d6d-bcf5-1a6073af7294
+		summarizeBy: none
+		sourceColumn: ModelID
+
+		annotation SummarizationSetBy = Automatic
+
+	column RuleID
+		dataType: string
+		lineageTag: ecdb7e79-a031-4f93-ba30-f80f2349adaf
+		summarizeBy: none
+		sourceColumn: RuleID
+
+		annotation SummarizationSetBy = Automatic
+
+	column LocationID
+		dataType: string
+		lineageTag: 6a75fe55-40fd-4886-be78-87b615513278
+		summarizeBy: none
+		sourceColumn: LocationID
+
+		annotation SummarizationSetBy = Automatic
+
+	column AssigneeID
+		dataType: string
+		lineageTag: 3829f141-abed-46d1-8636-c23915ac6175
+		summarizeBy: none
+		sourceColumn: AssigneeID
+
+		annotation SummarizationSetBy = Automatic
+
+	column SeverityID
+		dataType: string
+		lineageTag: fde5b533-715b-4bbf-93c2-674802144448
+		summarizeBy: none
+		sourceColumn: SeverityID
+
+		annotation SummarizationSetBy = Automatic
+
+	column StatusID
+		dataType: string
+		lineageTag: 7433cc39-648b-4e43-9849-338b0317bae4
+		summarizeBy: none
+		sourceColumn: StatusID
+
+		annotation SummarizationSetBy = Automatic
+
+	column IssueTypeID
+		dataType: string
+		lineageTag: ca07cccc-6073-4f71-b659-58a838ba7c65
+		summarizeBy: none
+		sourceColumn: IssueTypeID
+
+		annotation SummarizationSetBy = Automatic
+
+	column IFCGUID
+		dataType: string
+		lineageTag: 7090db5f-2392-4b24-b30b-91137a9614af
+		summarizeBy: none
+		sourceColumn: IFCGUID
+
+		annotation SummarizationSetBy = Automatic
+
+	column BCFGuid
+		dataType: string
+		lineageTag: 7c29f3b5-6693-418c-b303-d8c914396dba
+		summarizeBy: none
+		sourceColumn: BCFGuid
+
+		annotation SummarizationSetBy = Automatic
+
+	column ElementID
+		dataType: string
+		lineageTag: 70c5aa75-e90c-406b-b8fe-af417922b2f3
+		summarizeBy: none
+		sourceColumn: ElementID
+
+		annotation SummarizationSetBy = Automatic
+
+	column ElementType
+		dataType: string
+		lineageTag: 92ce1cfd-f976-4464-990d-74c1c46e7453
+		summarizeBy: none
+		sourceColumn: ElementType
+
+		annotation SummarizationSetBy = Automatic
+
+	column MaterialPrimary
+		dataType: string
+		lineageTag: 84f3f38d-779e-484c-9f23-d7bb8be30fa9
+		summarizeBy: none
+		sourceColumn: MaterialPrimary
+
+		annotation SummarizationSetBy = Automatic
+
+	column MaterialSecondary
+		dataType: string
+		lineageTag: 6d2d91a2-631f-4b76-bf2f-e8ae7e644065
+		summarizeBy: none
+		sourceColumn: MaterialSecondary
+
+		annotation SummarizationSetBy = Automatic
+
+	column JointType
+		dataType: string
+		lineageTag: a82c7590-e188-45f1-82e7-b1f35d762eea
+		summarizeBy: none
+		sourceColumn: JointType
+
+		annotation SummarizationSetBy = Automatic
+
+	column EnvironmentClass
+		dataType: string
+		lineageTag: 5a0fc4dc-a11d-4b17-a51e-7f8d50b7b5a7
+		summarizeBy: none
+		sourceColumn: EnvironmentClass
+
+		annotation SummarizationSetBy = Automatic
+
+	column SystemType
+		dataType: string
+		lineageTag: b3792fbc-fb11-411f-8ea5-5c5f3889a396
+		summarizeBy: none
+		sourceColumn: SystemType
+
+		annotation SummarizationSetBy = Automatic
+
+	column GalvanicScore
+		dataType: double
+		lineageTag: 218410d4-f19b-466b-b42a-bb80c12e38c4
+		summarizeBy: sum
+		sourceColumn: GalvanicScore
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CreviceScore
+		dataType: double
+		lineageTag: 7779bdef-4249-4ca7-9f88-d6dafa19b104
+		summarizeBy: sum
+		sourceColumn: CreviceScore
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CombinedScore
+		dataType: double
+		lineageTag: 97fe9065-3341-4c8f-ba40-6a2802cb6f56
+		summarizeBy: sum
+		sourceColumn: CombinedScore
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column DominantMechanism
+		dataType: string
+		lineageTag: 6a6b0f8e-bb8f-4d36-b9ad-552cf2712a9e
+		summarizeBy: none
+		sourceColumn: DominantMechanism
+
+		annotation SummarizationSetBy = Automatic
+
+	column X
+		dataType: double
+		lineageTag: 0cd4ebb0-1ac3-47a8-9b8d-2de51c69abd4
+		summarizeBy: sum
+		sourceColumn: X
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Y
+		dataType: double
+		lineageTag: 3c77819e-60b3-42a6-8c6b-849911b75a49
+		summarizeBy: sum
+		sourceColumn: Y
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Z
+		dataType: double
+		lineageTag: 1fd009ea-b9b0-41bd-ad89-9b80b8e71dc8
+		summarizeBy: sum
+		sourceColumn: Z
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CostImpactGBP
+		dataType: double
+		lineageTag: ffcc3403-d947-4b27-8fe2-13b71d18f684
+		summarizeBy: sum
+		sourceColumn: CostImpactGBP
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column DelayDays
+		dataType: int64
+		formatString: 0
+		lineageTag: 13519454-37c2-4345-b95c-3b28bba5cced
+		summarizeBy: sum
+		sourceColumn: DelayDays
+
+		annotation SummarizationSetBy = Automatic
+
+	column Mitigation
+		dataType: string
+		lineageTag: b8c442ad-685b-42bb-aebd-02f35bd31404
+		summarizeBy: none
+		sourceColumn: Mitigation
+
+		annotation SummarizationSetBy = Automatic
+
+	column Notes
+		dataType: string
+		lineageTag: 8de3ac16-7b7a-4c31-8aee-deb765f75af2
+		summarizeBy: none
+		sourceColumn: Notes
+
+		annotation SummarizationSetBy = Automatic
+
+	column CreatedDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: c4621515-2719-4212-bdfc-266895ea9a06
+		summarizeBy: none
+		sourceColumn: CreatedDate
+
+		variation Variation
+			isDefault
+			relationship: 34d4bd61-07e7-4ace-8147-da9a00c2ccc0
+			defaultHierarchy: LocalDateTable_6a00329b-a149-49b0-b9fb-bb86000f3c59.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column ClosedDate
+		dataType: string
+		lineageTag: 570cb4f0-9f1c-434a-82e2-997158054f05
+		summarizeBy: none
+		sourceColumn: ClosedDate
+
+		annotation SummarizationSetBy = Automatic
+
+	column RunID
+		dataType: string
+		lineageTag: a5031416-cabc-447b-a4a6-c398e5720c9e
+		summarizeBy: none
+		sourceColumn: RunID
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsOpen
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 0fb54f64-2a77-4cd5-87f5-219efa5000ab
+		summarizeBy: none
+		sourceColumn: IsOpen
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsCriticalOrHigh
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: b915cee9-69c0-42f7-923d-d700b1f32172
+		summarizeBy: none
+		sourceColumn: IsCriticalOrHigh
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsComplianceFailure
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 3ef48e38-53df-4a9a-9c8c-492a71d013b8
+		summarizeBy: none
+		sourceColumn: IsComplianceFailure
+
+		annotation SummarizationSetBy = Automatic
+
+	partition issues = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("D:\Zigurat Masters\bimguard-analytics-repo\bimguard-repo\bimguard_app\modules\analytics_export_test\facts\issues.csv"),[Delimiter=",", Columns=35, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"IssueID", type text}, {"ProjectID", type text}, {"ModelID", type text}, {"RuleID", type text}, {"LocationID", type text}, {"AssigneeID", type text}, {"SeverityID", type text}, {"StatusID", type text}, {"IssueTypeID", type text}, {"IFCGUID", type text}, {"BCFGuid", type text}, {"ElementID", type text}, {"ElementType", type text}, {"MaterialPrimary", type text}, {"MaterialSecondary", type text}, {"JointType", type text}, {"EnvironmentClass", type text}, {"SystemType", type text}, {"GalvanicScore", type number}, {"CreviceScore", type number}, {"CombinedScore", type number}, {"DominantMechanism", type text}, {"X", type number}, {"Y", type number}, {"Z", type number}, {"CostImpactGBP", type number}, {"DelayDays", Int64.Type}, {"Mitigation", type text}, {"Notes", type text}, {"CreatedDate", type date}, {"ClosedDate", type text}, {"RunID", type text}, {"IsOpen", type logical}, {"IsCriticalOrHigh", type logical}, {"IsComplianceFailure", type logical}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

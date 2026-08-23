@@ -1,0 +1,56 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.5.0/schema.json",
+  "name": "5972954be54d87e9966d",
+  "position": {
+    "x": 980.76696165191743,
+    "y": 23.598820058997052,
+    "z": 3000,
+    "height": 231.26843657817111,
+    "width": 277.52212389380531,
+    "tabOrder": 3000
+  },
+  "visual": {
+    "visualType": "advanceCardE03760C5AB684758B56AA29F9E6C257B",
+    "query": {
+      "queryState": {
+        "mainMeasure": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "issues"
+                    }
+                  },
+                  "Property": "Compliance Score %"
+                }
+              },
+              "queryRef": "issues.Compliance Score %",
+              "nativeQueryRef": "Compliance Score %"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "issues"
+                  }
+                },
+                "Property": "Compliance Score %"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

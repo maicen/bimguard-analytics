@@ -7,38 +7,41 @@
 
 ## What this repository contains
 
+This repository is the **analytics deliverable only**: the Power BI semantic
+model, the data contract it consumes, and the sample data used to develop
+against it. The compliance application that produces that data lives
+upstream in [`maicen/bim-guard`](https://github.com/maicen/bim-guard).
+
 | Folder | Contents |
 |---|---|
-| `bimguard_app/` | Python/Streamlit compliance application |
-| `bimguard_app/modules/` | IFC parser, compliance runner, BCF generator, analytics export |
-| `powerbi/` | Power BI PBIP project (SemanticModel + Report) |
-| `data/schema/` | Data contract specification |
-| `data/samples/` | Synthetic sample CSVs for Power BI development |
-| `docs/` | Dashboard blueprint, architecture notes |
-| `scripts/` | Utility scripts |
-| `.github/workflows/` | CI — model validation, data sync |
+| `powerbi/` | Power BI PBIP project — `BIMGuardAnalytics.SemanticModel/` (incl. `model.bim`) + `BIMGuardAnalytics.Report/`, with `.pbip` and `.pbix` |
+| `data/schema/` | `data-contract.md` — the versioned CSV pack specification |
+| `data/samples/` | Sample data for Power BI development (rulesets, BCF exports, issue history) |
+| `docs/` | `dashboard-blueprint.md` |
+| `scripts/` | Utility scripts (currently empty) |
+| `.github/workflows/` | CI — `validate-model.yml`, `analytics-schema-check.yml` |
 
 ---
 
 ## Architecture
 
 ```
-IFC file (ISO 16739-1)
+UPSTREAM — maicen/bim-guard
+  IFC file (ISO 16739-1)
         │
         ▼
-┌─────────────────────┐
-│  ifc_parser.py      │  ← ifcopenshell (OpenBIM)
-│  compliance_runner  │  ← GC-001 + CC-001 engines
-│  bcf_generator      │  ← BCF 2.1 output
-│  analytics_export   │  ← Power BI CSV pack
-└─────────────────────┘
+  ifc_parser / compliance_runner   ← ifcopenshell, corrosion engines
+  bcf_generator                    ← BCF 2.1 output
+  analytics export                 ← Power BI CSV pack
         │
         ▼
-analytics_export/
-  facts/issues.csv              → Fact table (35 columns)
-  facts/issue_status_history.csv
-  dimensions/dim_*.csv (×9)
-  meta/export_manifest.json
+  analytics_export/
+    facts/issues.csv               → Fact table (35 columns)
+    facts/issue_status_history.csv
+    dimensions/dim_*.csv (×9)
+    meta/export_manifest.json
+════════════════════════════════════ repository boundary
+THIS REPOSITORY
         │
         ▼
 ┌─────────────────────┐
@@ -50,40 +53,56 @@ analytics_export/
   Power BI Service (via GitHub Git integration)
 ```
 
+The boundary is the CSV pack defined in `data/schema/data-contract.md`.
+Everything above it is produced upstream; everything below it is this
+repository's responsibility.
+
 ---
 
-## Corrosion compliance engines
+## Engine Coverage
+
+Which corrosion engines reach this repository's data contract. Status is
+what the upstream engines actually do, not what is specified for them.
 
 | Engine | Standard | Status |
 |---|---|---|
-| **GC-001** Galvanic Corrosion | NASA-STD-6012 / WorldStainless | ✅ Released v1.0.0 |
-| **CC-001** Crevice Corrosion | EN ISO 15329 / ASTM G48 / CIRIA C692 | ✅ Released v1.0.0 |
-| **MC-001** Microbially Influenced Corrosion | CIBSE Guide G / ASHRAE 188 | 🔲 Planned |
+| **GC-001** Galvanic Corrosion | NASA-STD-6012 / WorldStainless | ✅ Implemented — reaches the CSV pack |
+| **CC-001** Crevice Corrosion | EN ISO 15329 / ASTM G48 / CIRIA C692 | ✅ Implemented — reaches the CSV pack |
+| **MC-001** Microbially Influenced Corrosion | CIBSE Guide G / ASHRAE 188 | ✅ Implemented — reaches the CSV pack |
+| **MM-001** Material–Media Compatibility | — | 🔲 Post-FMP roadmap |
+| **XM-001** Cross-Material Galvanic | — | 🔲 Post-FMP roadmap |
+
+**Validation caveat.** A 37-model sweep over third-party IFC files
+(Appendix A in the core repository) found that the three implemented
+engines are limited less by their logic than by the data available in
+federated models: the inputs they require are present on a very small
+fraction of real elements, so their output on third-party models is close
+to constant. Dashboard figures derived from them should be read as
+demonstrating the analytics pipeline, not as calibrated corrosion risk.
+MM-001 and XM-001 do not currently load against their shipped rule packs
+and produce no findings at all — hence roadmap, not released.
 
 ---
 
 ## Getting started
 
-### Run the Streamlit application
-
-```bash
-pip install streamlit ifcopenshell laspy numpy pandas plotly
-streamlit run bimguard_app/app.py
-# Opens at http://localhost:8501
-```
-
-### Run analytics export (standalone)
-
-```bash
-python bimguard_app/modules/analytics_export.py
-# Writes analytics_export/ with all 12 Power BI CSVs
-```
-
 ### Open the Power BI dashboard
 
 1. Open `powerbi/BIMGuardAnalytics.pbip` in Power BI Desktop
-2. In Transform Data → Manage Parameters, set `DataFolderPath` to your local `analytics_export/` folder
+2. In Transform Data → Manage Parameters, set `DataFolderPath` to an
+   `analytics_export/` folder produced upstream, or to `data/samples/` to
+   develop against the sample data in this repository
 3. Refresh — all tables load from the CSV pack
+
+### Produce the CSV pack
+
+The export tooling is **not** in this repository. Generate the pack from
+the upstream application ([`maicen/bim-guard`](https://github.com/maicen/bim-guard))
+and point `DataFolderPath` at the result. The pack's required shape —
+`facts/issues.csv` (35 columns), `facts/issue_status_history.csv`,
+`dimensions/dim_*.csv` (×9), `meta/export_manifest.json` — is specified in
+`data/schema/data-contract.md`, which is the authority for the contract
+regardless of which tool writes it.
 
 ---
 
@@ -105,8 +124,10 @@ Always merge `feat/*` → `dev` first, then `dev` → `main` via PR.
 
 ## Data contract
 
-The BIMGUARD AI Streamlit app exports a Power BI-ready CSV pack via `analytics_export.py`.  
-The schema is versioned at `data/schema/data-contract.md`.
+The upstream BIMGUARD AI application exports a Power BI-ready CSV pack.  
+The schema is versioned at `data/schema/data-contract.md` and is the
+interface between the two repositories: this repository consumes the pack
+and makes no assumptions about how it was produced.
 
 Current schema version: **1.0.0**
 

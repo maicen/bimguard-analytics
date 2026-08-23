@@ -1,0 +1,56 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.5.0/schema.json",
+  "name": "e20eea5206069e89896e",
+  "position": {
+    "x": 425.7227138643068,
+    "y": 23.598820058997052,
+    "z": 1000,
+    "height": 232.212389380531,
+    "width": 277.52212389380531,
+    "tabOrder": 1000
+  },
+  "visual": {
+    "visualType": "advanceCardE03760C5AB684758B56AA29F9E6C257B",
+    "query": {
+      "queryState": {
+        "mainMeasure": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "issues"
+                    }
+                  },
+                  "Property": "Open Issues"
+                }
+              },
+              "queryRef": "issues.Open Issues",
+              "nativeQueryRef": "Open Issues"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "issues"
+                  }
+                },
+                "Property": "Open Issues"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

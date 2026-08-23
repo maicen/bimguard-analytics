@@ -1,0 +1,85 @@
+table issue_status_history
+	lineageTag: bd295d69-3b26-4855-b603-703bee67b102
+
+	column HistoryID
+		dataType: string
+		lineageTag: 7e55b70d-4b94-40d1-83e0-546214fa0056
+		summarizeBy: none
+		sourceColumn: HistoryID
+
+		annotation SummarizationSetBy = Automatic
+
+	column IssueID
+		dataType: string
+		lineageTag: cfac3581-36dc-493f-91ed-46b706d5df27
+		summarizeBy: none
+		sourceColumn: IssueID
+
+		annotation SummarizationSetBy = Automatic
+
+	column FromStatusID
+		dataType: string
+		lineageTag: 1fcfc293-fae8-426f-a0dd-b847c4251dce
+		summarizeBy: none
+		sourceColumn: FromStatusID
+
+		annotation SummarizationSetBy = Automatic
+
+	column ToStatusID
+		dataType: string
+		lineageTag: 0ae3144c-e471-42bc-9e0b-6c6b42f8071b
+		summarizeBy: none
+		sourceColumn: ToStatusID
+
+		annotation SummarizationSetBy = Automatic
+
+	column ChangedDate
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: fc3f7b23-f793-4a70-a753-7f783ed1e266
+		summarizeBy: none
+		sourceColumn: ChangedDate
+
+		variation Variation
+			isDefault
+			relationship: b38ef6a8-83d1-4888-b6ae-aed8466adeca
+			defaultHierarchy: LocalDateTable_86b9ebfa-dd62-45d9-809d-de7023b6afc0.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column ChangedBy
+		dataType: string
+		lineageTag: ca1872b3-4279-4df1-ba6f-5d4eebbe4d18
+		summarizeBy: none
+		sourceColumn: ChangedBy
+
+		annotation SummarizationSetBy = Automatic
+
+	column Comment
+		dataType: string
+		lineageTag: e37c6e78-93cd-4ba0-85ae-99f62da82759
+		summarizeBy: none
+		sourceColumn: Comment
+
+		annotation SummarizationSetBy = Automatic
+
+	column EventType
+		dataType: string
+		lineageTag: cee110a6-b6d7-4152-8587-d7a1a3847b9b
+		summarizeBy: none
+		sourceColumn: EventType
+
+		annotation SummarizationSetBy = Automatic
+
+	partition issue_status_history = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("D:\Zigurat Masters\bimguard-analytics-repo\bimguard-repo\bimguard_app\modules\analytics_export_test\facts\issue_status_history.csv"),[Delimiter=",", Columns=8, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"HistoryID", type text}, {"IssueID", type text}, {"FromStatusID", type text}, {"ToStatusID", type text}, {"ChangedDate", type datetime}, {"ChangedBy", type text}, {"Comment", type text}, {"EventType", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

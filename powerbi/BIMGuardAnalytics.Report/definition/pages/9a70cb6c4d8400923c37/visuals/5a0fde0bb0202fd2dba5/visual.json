@@ -1,0 +1,86 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.5.0/schema.json",
+  "name": "5a0fde0bb0202fd2dba5",
+  "position": {
+    "x": 0,
+    "y": 187.84660766961653,
+    "z": 4000,
+    "height": 235.04424778761063,
+    "width": 519.1740412979351,
+    "tabOrder": 4000
+  },
+  "visual": {
+    "visualType": "lineChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "HierarchyLevel": {
+                  "Expression": {
+                    "Hierarchy": {
+                      "Expression": {
+                        "PropertyVariationSource": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "issues"
+                            }
+                          },
+                          "Name": "Variation",
+                          "Property": "CreatedDate"
+                        }
+                      },
+                      "Hierarchy": "Date Hierarchy"
+                    }
+                  },
+                  "Level": "Month"
+                }
+              },
+              "queryRef": "issues.CreatedDate.Variation.Date Hierarchy.Month",
+              "nativeQueryRef": "CreatedDate Month",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "issues"
+                    }
+                  },
+                  "Property": "Total Issues"
+                }
+              },
+              "queryRef": "issues.Total Issues",
+              "nativeQueryRef": "Total Issues"
+            }
+          ]
+        },
+        "Y2": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "issues"
+                    }
+                  },
+                  "Property": "Open Issues"
+                }
+              },
+              "queryRef": "issues.Open Issues",
+              "nativeQueryRef": "Open Issues"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

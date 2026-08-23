@@ -1,0 +1,66 @@
+table dim_status
+	lineageTag: 01774eb1-a938-4bfe-a300-b474b86142fe
+
+	column StatusID
+		dataType: string
+		lineageTag: 7c08edb4-3190-4992-9ccc-cb03ebb511c4
+		summarizeBy: none
+		sourceColumn: StatusID
+
+		annotation SummarizationSetBy = Automatic
+
+	column StatusName
+		dataType: string
+		lineageTag: cec4b830-f930-402d-9a6e-a04b87e8908d
+		summarizeBy: none
+		sourceColumn: StatusName
+
+		annotation SummarizationSetBy = Automatic
+
+	column StatusCode
+		dataType: string
+		lineageTag: 3ef91cc5-3aa8-41d3-9291-805ceecb5ac6
+		summarizeBy: none
+		sourceColumn: StatusCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsActive
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 18658e4b-0fcf-4681-bbff-d531370e8e22
+		summarizeBy: none
+		sourceColumn: IsActive
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsTerminal
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: c1e5d3e2-73cd-4754-b3e2-6887cfaf3133
+		summarizeBy: none
+		sourceColumn: IsTerminal
+
+		annotation SummarizationSetBy = Automatic
+
+	column SortOrder
+		dataType: int64
+		formatString: 0
+		lineageTag: 860a17bc-f197-46bb-aacc-56fbfe2acd1f
+		summarizeBy: none
+		sourceColumn: SortOrder
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_status = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("D:\Zigurat Masters\bimguard-analytics-repo\bimguard-repo\bimguard_app\modules\analytics_export_test\dimensions\dim_status.csv"),[Delimiter=",", Columns=6, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"StatusID", type text}, {"StatusName", type text}, {"StatusCode", type text}, {"IsActive", type logical}, {"IsTerminal", type logical}, {"SortOrder", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,34 @@
+model Model
+	culture: en-NZ
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-NZ
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["issues","issue_status_history","dim_severity","dim_locations","dim_assignments","dim_issue_types","dim_mechanism","dim_models","dim_projects","dim_rules","dim_status"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table issues
+ref table DateTableTemplate_f34ce6ed-80e2-4eef-bcba-93ac0997d290
+ref table LocalDateTable_6a00329b-a149-49b0-b9fb-bb86000f3c59
+ref table issue_status_history
+ref table LocalDateTable_86b9ebfa-dd62-45d9-809d-de7023b6afc0
+ref table dim_severity
+ref table dim_locations
+ref table dim_assignments
+ref table dim_issue_types
+ref table dim_mechanism
+ref table dim_models
+ref table LocalDateTable_4a2c611d-5d19-432e-b37c-78b283dc0236
+ref table dim_projects
+ref table LocalDateTable_373534a4-ffdf-4f75-b7e5-01b7fcecd997
+ref table LocalDateTable_f8d7f8d2-4dca-4395-aac3-a07587447ae3
+ref table dim_rules
+ref table dim_status
+
+ref cultureInfo en-NZ
+

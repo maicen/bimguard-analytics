@@ -1,0 +1,80 @@
+table dim_locations
+	lineageTag: c15d5a91-d0cb-4f3d-8e7b-ce5d81a38617
+
+	column LocationID
+		dataType: string
+		lineageTag: bd53df89-8aeb-4871-be97-82c10ec1f2b7
+		summarizeBy: none
+		sourceColumn: LocationID
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProjectID
+		dataType: string
+		lineageTag: 6c96bf33-fc33-463c-981e-bb7df140d93f
+		summarizeBy: none
+		sourceColumn: ProjectID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Floor
+		dataType: string
+		lineageTag: c57f4ed5-5dde-4ebf-8524-0d287b936e63
+		summarizeBy: none
+		sourceColumn: Floor
+
+		annotation SummarizationSetBy = Automatic
+
+	column Zone
+		dataType: string
+		lineageTag: 314fdda0-d155-400e-8f80-b4626ae1642a
+		summarizeBy: none
+		sourceColumn: Zone
+
+		annotation SummarizationSetBy = Automatic
+
+	column Level
+		dataType: int64
+		formatString: 0
+		lineageTag: 7eaa1787-3d19-4ae8-a38c-c6664161839d
+		summarizeBy: none
+		sourceColumn: Level
+
+		annotation SummarizationSetBy = Automatic
+
+	column Building
+		dataType: string
+		lineageTag: af6aab8e-a062-42b0-b647-a59953fa1171
+		summarizeBy: none
+		sourceColumn: Building
+
+		annotation SummarizationSetBy = Automatic
+
+	column Wing
+		dataType: string
+		lineageTag: dcd33ed4-a92b-470c-b745-b5a16a54f367
+		summarizeBy: none
+		sourceColumn: Wing
+
+		annotation SummarizationSetBy = Automatic
+
+	column Description
+		dataType: string
+		lineageTag: 60826d2f-ad8e-40bf-8f45-45733986fdcc
+		summarizeBy: none
+		sourceColumn: Description
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_locations = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("D:\Zigurat Masters\bimguard-analytics-repo\bimguard-repo\bimguard_app\modules\analytics_export_test\dimensions\dim_locations.csv"),[Delimiter=",", Columns=8, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"LocationID", type text}, {"ProjectID", type text}, {"Floor", type text}, {"Zone", type text}, {"Level", Int64.Type}, {"Building", type text}, {"Wing", type text}, {"Description", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,76 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.5.0/schema.json",
+  "name": "2efc06fb3a7adf4aa5c1",
+  "position": {
+    "x": 713.62831858407083,
+    "y": 261.47492625368733,
+    "z": 5000,
+    "height": 220.88495575221239,
+    "width": 518.23008849557527,
+    "tabOrder": 5000
+  },
+  "visual": {
+    "visualType": "pivotTable",
+    "query": {
+      "queryState": {
+        "Columns": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_locations"
+                    }
+                  },
+                  "Property": "Zone"
+                }
+              },
+              "queryRef": "dim_locations.Zone",
+              "nativeQueryRef": "Zone",
+              "active": true
+            }
+          ]
+        },
+        "Rows": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_locations"
+                    }
+                  },
+                  "Property": "Floor"
+                }
+              },
+              "queryRef": "dim_locations.Floor",
+              "nativeQueryRef": "Floor",
+              "active": true
+            }
+          ]
+        },
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "issues"
+                    }
+                  },
+                  "Property": "Total Issues"
+                }
+              },
+              "queryRef": "issues.Total Issues",
+              "nativeQueryRef": "Total Issues"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

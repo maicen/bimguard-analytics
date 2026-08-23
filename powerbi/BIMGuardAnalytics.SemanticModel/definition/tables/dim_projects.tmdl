@@ -1,0 +1,112 @@
+table dim_projects
+	lineageTag: 2d586305-3074-45dd-8c0b-91f8d5de67e6
+
+	column ProjectID
+		dataType: string
+		lineageTag: 420402cc-ac1e-4ef0-85b4-921868100895
+		summarizeBy: none
+		sourceColumn: ProjectID
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProjectName
+		dataType: string
+		lineageTag: 5a60cd2c-9580-4d6c-b491-92ec66ba5d1d
+		summarizeBy: none
+		sourceColumn: ProjectName
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProjectCode
+		dataType: string
+		lineageTag: 7187557e-3a5f-43c7-be63-12480f256396
+		summarizeBy: none
+		sourceColumn: ProjectCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column Client
+		dataType: string
+		lineageTag: 10d5a2fa-f9f3-41f6-8337-712eed32d605
+		summarizeBy: none
+		sourceColumn: Client
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sector
+		dataType: string
+		lineageTag: 51a2e466-6fcf-417f-89df-d8fda7a2959e
+		summarizeBy: none
+		sourceColumn: Sector
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		dataType: string
+		lineageTag: 52a363ab-a16e-469f-b8f9-f554490416e7
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column Currency
+		dataType: string
+		lineageTag: 67e91647-9ea6-4bd8-9692-46c4c885df3e
+		summarizeBy: none
+		sourceColumn: Currency
+
+		annotation SummarizationSetBy = Automatic
+
+	column BaselineDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: a7559bc7-d5bd-4b13-a2a4-5c8f942c1f4d
+		summarizeBy: none
+		sourceColumn: BaselineDate
+
+		variation Variation
+			isDefault
+			relationship: 82a2cc91-b731-429c-9f5e-d8ba67fe92bf
+			defaultHierarchy: LocalDateTable_373534a4-ffdf-4f75-b7e5-01b7fcecd997.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column IsActive
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: c91daf4b-4a1c-4f15-be3d-361b58ea33e2
+		summarizeBy: none
+		sourceColumn: IsActive
+
+		annotation SummarizationSetBy = Automatic
+
+	column CreatedDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 0bd5d8c1-ce99-4511-821d-0418d21d2460
+		summarizeBy: none
+		sourceColumn: CreatedDate
+
+		variation Variation
+			isDefault
+			relationship: 8d48eec4-19d3-46be-a5c7-673fc7b0249f
+			defaultHierarchy: LocalDateTable_f8d7f8d2-4dca-4395-aac3-a07587447ae3.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition dim_projects = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("D:\Zigurat Masters\bimguard-analytics-repo\bimguard-repo\bimguard_app\modules\analytics_export_test\dimensions\dim_projects.csv"),[Delimiter=",", Columns=10, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"ProjectID", type text}, {"ProjectName", type text}, {"ProjectCode", type text}, {"Client", type text}, {"Sector", type text}, {"Country", type text}, {"Currency", type text}, {"BaselineDate", type date}, {"IsActive", type logical}, {"CreatedDate", type date}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

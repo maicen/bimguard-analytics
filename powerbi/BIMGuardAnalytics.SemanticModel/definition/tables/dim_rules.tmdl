@@ -1,0 +1,80 @@
+table dim_rules
+	lineageTag: c496b6dc-264c-48e3-9eec-67ca88e31740
+
+	column RuleID
+		dataType: string
+		lineageTag: f895869b-a947-43ab-b98c-8d334fddc952
+		summarizeBy: none
+		sourceColumn: RuleID
+
+		annotation SummarizationSetBy = Automatic
+
+	column RuleCode
+		dataType: string
+		lineageTag: c0356ff7-8ef9-46ab-a528-9bdadd1fa9a6
+		summarizeBy: none
+		sourceColumn: RuleCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column RuleName
+		dataType: string
+		lineageTag: 9aeb0890-c772-4415-a7b9-0aefeca0e62b
+		summarizeBy: none
+		sourceColumn: RuleName
+
+		annotation SummarizationSetBy = Automatic
+
+	column MechanismID
+		dataType: string
+		lineageTag: 20817592-5c84-4d1b-a3b9-3fc16616aeca
+		summarizeBy: none
+		sourceColumn: MechanismID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Standard
+		dataType: string
+		lineageTag: e59d9441-48ac-4eaf-9ce9-263ee64c8e4e
+		summarizeBy: none
+		sourceColumn: Standard
+
+		annotation SummarizationSetBy = Automatic
+
+	column Version
+		dataType: string
+		lineageTag: 4552cf1c-3ac2-4156-9566-42b56f05fe39
+		summarizeBy: none
+		sourceColumn: Version
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsActive
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 9b50f5c6-ba87-4efa-9f39-1dc0029d9c20
+		summarizeBy: none
+		sourceColumn: IsActive
+
+		annotation SummarizationSetBy = Automatic
+
+	column Description
+		dataType: string
+		lineageTag: 7bf640e8-3958-4a9a-b508-1a7926605e52
+		summarizeBy: none
+		sourceColumn: Description
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_rules = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("D:\Zigurat Masters\bimguard-analytics-repo\bimguard-repo\bimguard_app\modules\analytics_export_test\dimensions\dim_rules.csv"),[Delimiter=",", Columns=8, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"RuleID", type text}, {"RuleCode", type text}, {"RuleName", type text}, {"MechanismID", type text}, {"Standard", type text}, {"Version", type text}, {"IsActive", type logical}, {"Description", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+
